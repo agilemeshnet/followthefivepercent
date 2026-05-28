@@ -1,0 +1,397 @@
+{
+  "title": "Follow the Five Percent",
+  "subtitle": "What Graph-Literate Enterprises Did Differently and Why It Matters",
+  "author": "Peter Cooper",
+  "doi": "pending",
+  "parts": [
+    {
+      "title": "The Prescription",
+      "subtitle": "Follow the Five Percent. The blueprint is public.",
+      "sections": [
+        {
+          "section": "Section I",
+          "title": "Follow the Five Percent",
+          "bare_fact": "95% of AI pilots fail. The 5% who succeed kept the connections in their data alive. Their results are audited and public.",
+          "falsification": "Find a company in the 5% that succeeded with purely tabular architecture and no relational reasoning capability.",
+          "ideas": [
+            {
+              "id": "95-fail",
+              "idea": "95% of enterprise AI pilots fail before production",
+              "surface": "MIT reported it. RAND confirmed it. McKinsey measured it. Nobody disputes the number.",
+              "depth": "The MIT Technology Review found 95% of generative AI pilots fail to reach production or deliver measurable returns. RAND found 80%+ of enterprise AI projects fail - double the rate of traditional IT. The usual post-mortem blames data quality, talent, or executive alignment. Another report is commissioned. It reaches broadly the same conclusions. This has been going on for some time now.",
+              "evidence": "MIT/Fortune 2025 [1], RAND RRA2680-1 [2], QuickLaunch 2025 [3]",
+              "status": "supported"
+            },
+            {
+              "id": "5-public",
+              "idea": "The 5% who succeed are public companies with auditable results",
+              "surface": "Filing annual reports with the SEC. Publishing investor presentations. Growing 30% year on year. They are not hiding.",
+              "depth": "Their architectures are documented. Their results are auditable. The blueprint for escape is sitting in public filings, available to anyone who looks. The question is not 'what should we build?' It is 'why are we not copying the companies that already built it?'",
+              "evidence": "Lemonade 10-K [20], Root 10-K [21], Allianz press releases [23], Shift Technology [22]",
+              "status": "supported"
+            },
+            {
+              "id": "connections-alive",
+              "idea": "They kept the connections in their data alive",
+              "surface": "That is it. That is the entire finding. Not better AI. Not more data scientists. Not bigger budgets. Connected data.",
+              "depth": "Customer connects to policy. Policy connects to claim. Claim connects to fraud signal. Signal connects to history. History connects to renewal. The chain is unbroken. The AI can walk along it and reason.",
+              "evidence": "All four case studies (Lemonade, Root, Allianz, AXA/Shift) share this single architectural property",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Winners",
+      "subtitle": "What the 5% actually did. In plain English.",
+      "sections": [
+        {
+          "section": "Section II",
+          "title": "Lemonade - The Two-Second Claim",
+          "bare_fact": "Lemonade processes claims in 2 seconds across 18 fraud algorithms because the data chain is unbroken.",
+          "falsification": "Show that Lemonade's speed is attributable to model quality rather than architectural connectivity.",
+          "ideas": [
+            {
+              "id": "lemonade-2sec",
+              "idea": "One claim. Two seconds. Eighteen fraud checks. No human.",
+              "surface": "AI Jim reads the claim, checks the policy, checks history, runs 18 fraud algorithms, cross-references third-party data, approves the payout, sends the money. Two seconds.",
+              "depth": "It works because every piece of information AI Jim needs is already connected. Customer to policy to claim to fraud signal to payment method to history. One continuous chain. The AI walks along the chain and makes a decision at the end of it.",
+              "evidence": "Lemonade blog, May 29 2023 world record. Q2 2025 shareholder letter.",
+              "status": "supported"
+            },
+            {
+              "id": "uk-25-days",
+              "idea": "Same claim at a UK insurer: 25 to 30 days",
+              "surface": "Someone exports a spreadsheet from one system. Someone else exports another from another system. A third person pastes them together. A handler reads it on Tuesday. Settlement in 25 to 30 days.",
+              "depth": "The claim arrives in one system. The policy lives in another. The fraud rules sit in a third. The handler queries a fifth system, waits for an overnight data refresh, and makes a decision on Thursday. If everything goes smoothly.",
+              "evidence": "Industry benchmarks for UK motor claims settlement times",
+              "status": "supported"
+            },
+            {
+              "id": "lemonade-financials",
+              "idea": "12-point loss ratio improvement. $1.24B in-force premium.",
+              "surface": "Q2 gross loss ratio improved from 79% to 67% year-on-year. Revenue up 35%. Approaching 3 million policyholders.",
+              "depth": "The financial results confirm the approach. This improvement occurred during a period of aggressive AI deployment over connected data architecture.",
+              "evidence": "Lemonade Q2 2025 shareholder letter, Q4 2025 8-K filing [20]",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "section": "Section III",
+          "title": "Root Insurance - The Living Price",
+          "bare_fact": "Root connects drivers to real-time telematics data. The price reflects reality, not a memory of reality.",
+          "falsification": "Show that Root's growth is attributable to pricing model quality rather than data connectivity.",
+          "ideas": [
+            {
+              "id": "root-living",
+              "idea": "The price reflects reality, not last year's memory of it",
+              "surface": "If you drive a Toyota or Lexus, your car sends driving data directly to Root's pricing model. Not once a year. Continuously.",
+              "depth": "Most insurers price from a static snapshot of a world that has moved on without them. Root connects the driver to the driving. It sounds obvious because it is.",
+              "evidence": "Root Connected Analytics Services partnership, Toyota/Lexus OEM APIs [21]",
+              "status": "supported"
+            },
+            {
+              "id": "root-financials",
+              "idea": "$1.52B revenue. 29% growth. Fastest-growing US auto insurer above $1B.",
+              "surface": "Net income $40.3 million. Telematics opt-in rates in the high-80% range - industry-leading.",
+              "depth": "They did not build a better regression. They connected the driver to the driving.",
+              "evidence": "Root 10-K 2025 [21]",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "section": "Section IV",
+          "title": "Allianz and AXA - Agentic AI Chains",
+          "bare_fact": "Allianz processes storm claims in under 5 minutes. AXA achieves >99% accuracy. Both because the AI can see the connections.",
+          "falsification": "Show equivalent speed/accuracy in a purely tabular claims system.",
+          "ideas": [
+            {
+              "id": "allianz-nemo",
+              "idea": "Storm claims in under 5 minutes. 80% processing time cut.",
+              "surface": "Allianz Australia deployed a chain of AI agents - each can see the connections between claim, weather event, location, policy, and claimant history. By design, not by spreadsheet.",
+              "depth": "Those connections are there by design - not scattered across six spreadsheets maintained by three departments who communicate primarily through the medium of slightly passive-aggressive emails about data discrepancies.",
+              "evidence": "Allianz press release, July 2025 [23]",
+              "status": "supported"
+            },
+            {
+              "id": "shift-axa",
+              "idea": "3% lower losses. 30% faster. 60% automated. >99% accurate.",
+              "surface": "Shift Technology reasons across the full chain - claimant to incident to vehicle to repair shop to historical pattern to fraud indicator.",
+              "depth": "It does not look at one row in one table. It looks at the whole neighbourhood of connections around a claim and decides whether the picture makes sense. Remarkably often, it does.",
+              "evidence": "Shift Technology press release 2025 [22]",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Why Most Cannot See It",
+      "subtitle": "The data shape they were given. The monoculture that reproduces it.",
+      "sections": [
+        {
+          "section": "Section V",
+          "title": "The Table Is Not the Enemy",
+          "bare_fact": "Tables earned their dominance. The problem is using only tables and assuming every question can be answered within their constraints.",
+          "falsification": "N/A - this section establishes the historical context.",
+          "ideas": [
+            {
+              "id": "codd-earned",
+              "idea": "Relational dominance was earned, not accidental",
+              "surface": "ACID transactions, SQL standardisation, regulatory legibility. Tables solve real problems. A general ledger should be a table.",
+              "depth": "Codd's relational algebra solved genuine problems. The error is not in using tables. It is in using only tables and assuming every domain question can be answered within their constraints. An excellent thing for a table to do. A peculiar thing to build your entire intelligence strategy on.",
+              "evidence": "Codd 1970 [5], Scott 1998 [7]",
+              "status": "supported"
+            },
+            {
+              "id": "graph-default",
+              "idea": "The table is the anomaly. The graph is the default.",
+              "surface": "A seven-month-old baby thinks in graphs. Infants extract relational patterns from around seven months of age. Social cognition drives primate brain expansion.",
+              "depth": "Developmental psychology shows infants spontaneously extract relational patterns. Systems thinking identifies feedback loops and flows as graph structures. The 5% built systems that match how reasoning actually works.",
+              "evidence": "Hochmann, Carey & Mehler 2018 [9], Dunbar 1998 [10], Meadows 2008 [11]",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "section": "Section VI",
+          "title": "The SQL Monoculture",
+          "bare_fact": "IT departments reproduce tabular thinking generationally. Graph modules in fewer than 1 in 6 university programmes.",
+          "falsification": "Find a major computer science curriculum where graph modelling is a core requirement rather than an elective.",
+          "ideas": [
+            {
+              "id": "1989-stopped",
+              "idea": "The profession stopped updating its assumptions after 1989",
+              "surface": "A remarkable number of data professionals concluded the relational model settled the matter permanently and have been building the same star schemas since.",
+              "depth": "Ralph Kimball, the father of dimensional modelling, might have had something to say about what his work has been used to justify. But Kimball died in 2022, and the profession has not noticeably updated its assumptions in his absence.",
+              "evidence": "NAM Info 2025 [15], industry curriculum analysis",
+              "status": "conjecture"
+            },
+            {
+              "id": "hedgehog",
+              "idea": "Institutional hedgehoggery carries Tetlock's forecasting penalty",
+              "surface": "An organisation committed to a single data paradigm interprets every domain through the one framework it trusts, even when the domain is visibly resisting.",
+              "depth": "Philip Tetlock's research distinguishes hedgehogs (one big thing) from foxes (many things). The SQL monoculture is institutional hedgehoggery. The 5% broke it by adding a second shape.",
+              "evidence": "Tetlock 2005 [18]",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Obstinate Goats",
+      "subtitle": "What the 95% actually look like, every day.",
+      "sections": [
+        {
+          "section": "Section VII",
+          "title": "The Household Scenario",
+          "bare_fact": "A real insurance scenario: five systems, one customer, zero connections. The AI cannot find the husband.",
+          "falsification": "Demonstrate a UK insurer answering the household exposure question from their existing tabular systems in under one minute.",
+          "ideas": [
+            {
+              "id": "goats",
+              "idea": "Five systems in the same building with no idea the others exist",
+              "surface": "Motor in CDL Strata. Drivers in a separate module. Pet in a different platform. Home in Guidewire. Flood data refreshed quarterly. Like obstinate goats tied to separate posts in the same field, each facing a different direction.",
+              "depth": "Nobody joins them. Nobody has been asked to. The AI cannot find the husband. It does not know about the flood plain. It cannot connect the water damage to the home location to the flood risk to the renewal date. The renewal goes out at the standard rate. The customer leaves.",
+              "evidence": "Insurance Technology Landscape 2026 [19]",
+              "status": "supported"
+            },
+            {
+              "id": "no-column",
+              "idea": "A spreadsheet has no column for 'is married to'",
+              "surface": "Those are relationships, and spreadsheets were not built to hold them. Spreadsheets were built to hold numbers. They are very good at it. That is not the same job.",
+              "depth": "The connections were thrown away before the AI ever saw the data - not deliberately, but because they did not fit the shape.",
+              "evidence": "Structural property of the relational model [5]",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Pattern Repeats",
+      "subtitle": "From finance to epidemiology. The same blindness, every time.",
+      "sections": [
+        {
+          "section": "Section VIII",
+          "title": "Cross-Domain Evidence",
+          "bare_fact": "The same connected-vs-disconnected pattern appears in finance, healthcare, intelligence, and epidemiology.",
+          "falsification": "Find a domain where disconnected data consistently outperforms connected data for relational reasoning tasks.",
+          "ideas": [
+            {
+              "id": "2008-crisis",
+              "idea": "2008: Each CDO row looked fine. The connections between them did not.",
+              "surface": "CDOs were rated low-risk on tabular analysis. The correlation structure was invisible. 79% of BBB subprime bonds were in synthetic CDOs.",
+              "depth": "The graph of underlying exposure dependencies was invisible in the ratings models, creating a highly correlated system that no tabular risk model could detect.",
+              "evidence": "Financial Crisis Inquiry Commission 2011 [27], Cordell/Huang/Williams Philadelphia Fed",
+              "status": "supported"
+            },
+            {
+              "id": "covid-k",
+              "idea": "COVID: 10-20% of infections caused 80% of transmission",
+              "surface": "A graph property invisible to models that assumed well-mixed populations. The dispersion parameter k was 0.1-0.2.",
+              "depth": "Transmission models that did not model network structure systematically underestimated transmission.",
+              "evidence": "Endo et al. 2020, Wellcome Open Research [30]",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Money on the Table",
+      "subtitle": "6.1 times. Not 6.1 percent.",
+      "sections": [
+        {
+          "section": "Section IX",
+          "title": "The Financial Gap",
+          "bare_fact": "6.1x total shareholder return for AI leaders. $246B market by 2035. The money goes to companies whose AI can reason about connections.",
+          "falsification": "Show that the TSR gap is fully explained by factors other than data architecture.",
+          "ideas": [
+            {
+              "id": "6x-tsr",
+              "idea": "6.1 times total shareholder return. Not 6.1 percent. Six times.",
+              "surface": "If your competitor is in the 5% and you are in the 95%, they are not slightly ahead. They are in a different race.",
+              "depth": "McKinsey attributes this to depth of AI integration. This paper argues that integration requires a data substrate capable of relational reasoning, and tabular-only architectures place a structural ceiling on integration depth.",
+              "evidence": "McKinsey Insurance 2030 [24]",
+              "status": "supported"
+            },
+            {
+              "id": "graph-necessary",
+              "idea": "You can have a graph and still fail. You cannot succeed without one.",
+              "surface": "Metromile failed. Hippo wrote down. Root traded below IPO for years. Connected architecture is necessary, not sufficient.",
+              "depth": "Capital discipline, actuarial competence, regulatory navigation, and market timing are all required alongside it.",
+              "evidence": "Metromile acquisition 2022, Hippo market data, Root IPO history",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Collision and the Consulting Trap",
+      "subtitle": "Why renting intelligence is the bubble waiting to burst.",
+      "sections": [
+        {
+          "section": "Section X",
+          "title": "The Consumer Duty Collision",
+          "bare_fact": "When AI built on fragmented data meets the FCA's Consumer Duty, you cannot explain a decision made by an algorithm fed fragmented noise.",
+          "falsification": "Demonstrate that a regulator has accepted 'our databases do not talk to each other' as an adequate explanation for a denied claim.",
+          "ideas": [
+            {
+              "id": "consumer-duty",
+              "idea": "The FCA does not care about your database architecture",
+              "surface": "Fair value. Clear understanding. Demonstrably good outcomes. The Consumer Duty demands all three. Fragmented data delivers none.",
+              "depth": "The AI denies a valid claim because the motor policy and the home claim are not speaking to one another. It is not malicious - it is operating in induced corporate amnesia. But the regulator demands an explanation, and you cannot explain a decision made by an algorithm that was fed fragmented noise.",
+              "evidence": "FCA Consumer Duty (PS22/9), effective July 2023",
+              "status": "supported"
+            },
+            {
+              "id": "palantir-trap",
+              "idea": "GBP 330 million for a subscription that leaves nothing behind",
+              "surface": "The NHS awarded Palantir GBP 330 million for a Federated Data Platform. When the contract ends, it leaves no software, no IP, no system improvements. All the know-how belongs to the supplier.",
+              "depth": "It is rather like paying a small fortune to a remarkably expensive personal trainer who insists on doing all the push-ups for you, and then leaving with your muscles. The staff who have to use it report it is completely awful to navigate. GBP 330 million for perpetual vendor lock-in.",
+              "evidence": "NHS England/DHSC Palantir FDP contract [34], openDemocracy investigation, BMJ coverage, parliamentary scrutiny",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "section": "Section XI",
+          "title": "Own Your Intelligence",
+          "bare_fact": "Upskill internal staff in graph literacy. When they own the semantic layer, the AI becomes explainable and the consulting bubble bursts.",
+          "falsification": "Show that external vendor-owned semantic layers produce better long-term outcomes than internally-owned ones at comparable total cost.",
+          "ideas": [
+            {
+              "id": "own-not-rent",
+              "idea": "Why are we renting our intelligence when we could own it?",
+              "surface": "The great scandal of the AI boom is the illusion that you must pay billions to external black-box vendors to understand your own business. You do not.",
+              "depth": "The NHS and insurance are brimming with brilliant, under-utilised domain experts - clinicians, underwriters, claims handlers - who know the business better than any external consultant. All they need is to be taught the true shape of the data.",
+              "evidence": "Graph literacy upskilling evidence from 5% case studies",
+              "status": "supported"
+            },
+            {
+              "id": "staff-own-layer",
+              "idea": "When internal staff own the semantic layer, the magic happens",
+              "surface": "The AI becomes explainable. Every hop is traceable, named, governed by the people who understand the rules. The Consumer Duty is satisfied. Vendor dependency evaporates.",
+              "depth": "The 5% are not outsourcing their brains. They are cultivating their own connected gardens. Once the rest realises they can empower their own staff to build these living networks, the great AI consulting bubble will not deflate - it will burst spectacularly.",
+              "evidence": "Lemonade, Root, Allianz, AXA/Shift all built internal graph capabilities",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Map",
+      "subtitle": "How to start. Nothing breaks.",
+      "sections": [
+        {
+          "section": "Section XII",
+          "title": "The Semantic Overlay",
+          "bare_fact": "Start by drawing connections on top of existing systems. Nothing breaks. Nothing migrates. The AI starts seeing relationships.",
+          "falsification": "N/A - practical prescription.",
+          "ideas": [
+            {
+              "id": "overlay",
+              "idea": "The first step is a map, not a migration",
+              "surface": "'This customer in motor is the same person as this policyholder in home.' Draw the connections on top of what you already have.",
+              "depth": "Virtual knowledge graph platforms enable graph-aware querying over relational backends. CIOs approve because nothing changes in production. CFOs approve because ROI arrives in months. Compliance officers approve because a graph traversal is an explanation.",
+              "evidence": "EU AI Act requirements for auditable decision paths",
+              "status": "supported"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "links": [
+    {"from_id": "95-fail", "to_id": "5-public", "rel_type": "CONTRASTS_WITH"},
+    {"from_id": "5-public", "to_id": "connections-alive", "rel_type": "EXPLAINED_BY"},
+    {"from_id": "connections-alive", "to_id": "lemonade-2sec", "rel_type": "DEMONSTRATED_BY"},
+    {"from_id": "connections-alive", "to_id": "root-living", "rel_type": "DEMONSTRATED_BY"},
+    {"from_id": "connections-alive", "to_id": "allianz-nemo", "rel_type": "DEMONSTRATED_BY"},
+    {"from_id": "connections-alive", "to_id": "shift-axa", "rel_type": "DEMONSTRATED_BY"},
+    {"from_id": "lemonade-2sec", "to_id": "uk-25-days", "rel_type": "CONTRASTS_WITH"},
+    {"from_id": "lemonade-2sec", "to_id": "lemonade-financials", "rel_type": "CONFIRMED_BY"},
+    {"from_id": "root-living", "to_id": "root-financials", "rel_type": "CONFIRMED_BY"},
+    {"from_id": "uk-25-days", "to_id": "goats", "rel_type": "SAME_PATTERN"},
+    {"from_id": "codd-earned", "to_id": "1989-stopped", "rel_type": "LED_TO"},
+    {"from_id": "1989-stopped", "to_id": "hedgehog", "rel_type": "MANIFESTS_AS"},
+    {"from_id": "hedgehog", "to_id": "goats", "rel_type": "PRODUCES"},
+    {"from_id": "goats", "to_id": "no-column", "rel_type": "CAUSED_BY"},
+    {"from_id": "no-column", "to_id": "95-fail", "rel_type": "EXPLAINS"},
+    {"from_id": "goats", "to_id": "2008-crisis", "rel_type": "SAME_PATTERN"},
+    {"from_id": "goats", "to_id": "covid-k", "rel_type": "SAME_PATTERN"},
+    {"from_id": "6x-tsr", "to_id": "connections-alive", "rel_type": "MEASURES"},
+    {"from_id": "graph-necessary", "to_id": "overlay", "rel_type": "LEADS_TO"},
+    {"from_id": "goats", "to_id": "consumer-duty", "rel_type": "COLLIDES_WITH"},
+    {"from_id": "consumer-duty", "to_id": "palantir-trap", "rel_type": "PANIC_RESPONSE"},
+    {"from_id": "palantir-trap", "to_id": "own-not-rent", "rel_type": "CONTRASTS_WITH"},
+    {"from_id": "own-not-rent", "to_id": "staff-own-layer", "rel_type": "ENABLES"},
+    {"from_id": "staff-own-layer", "to_id": "overlay", "rel_type": "IMPLEMENTED_BY"},
+    {"from_id": "staff-own-layer", "to_id": "connections-alive", "rel_type": "SAME_PRINCIPLE"},
+    {"from_id": "no-column", "to_id": "consumer-duty", "rel_type": "TRIGGERS"}
+  ],
+  "conjectures": [
+    {
+      "id": "C1",
+      "title": "The Consulting Bubble Conjecture",
+      "bare_fact": "The multi-billion-dollar AI consulting industry is a dependency trap. When organisations realise they can upskill internal staff to own their semantic layer, the bubble bursts.",
+      "date": "May 2026",
+      "source": "Cooper 2026, NHS Palantir case study",
+      "supports": "X, XI"
+    }
+  ],
+  "authors": [
+    {"name": "Peter Cooper", "contribution": "Author, AgileMesh", "relevance": "Philosophy engineer. The Shape of Thought framework."},
+    {"name": "E. F. Codd", "contribution": "Relational model (1970)", "relevance": "Earned dominance. Not the enemy. The starting point."},
+    {"name": "Philip Tetlock", "contribution": "Hedgehog vs Fox (2005)", "relevance": "Institutional hedgehoggery. The SQL monoculture."},
+    {"name": "Donella Meadows", "contribution": "Systems Thinking (2008)", "relevance": "Graphs as the natural shape of complex behaviour."},
+    {"name": "Robin Dunbar", "contribution": "Social Brain Hypothesis (1998)", "relevance": "Primate cognition is graph-shaped by default."}
+  ]
+}

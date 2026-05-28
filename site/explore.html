@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore - Follow the Five Percent</title>
+<meta name="description" content="A living, graph-generated view of Follow the Five Percent. Zoom from headline to academic depth. The ideas stand - only the projection changes.">
+<link rel="stylesheet" href="style.css">
+<style>
+.explore-layout {
+    display: flex;
+    min-height: 100vh;
+}
+.toc-sidebar {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 110px);
+    overflow-y: auto;
+    overflow-x: visible;
+    padding: 12px 10px 12px 28px;
+    font-size: 11px;
+    z-index: 80;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.toc-part {
+    margin-bottom: 6px;
+}
+.toc-part-title {
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 0;
+    cursor: pointer;
+}
+.toc-part-title:hover { color: var(--accent); }
+.toc-section-link {
+    display: block;
+    padding: 2px 0 2px 10px;
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 11px;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.toc-section-link:hover {
+    color: var(--accent);
+}
+.toc-section-link.active {
+    color: var(--accent);
+    border-left-color: var(--copper);
+    font-weight: 600;
+}
+.toc-section-link {
+    position: relative;
+    padding-right: 10px;
+}
+.toc-signpost {
+    display: none;
+    position: absolute;
+    left: -22px;
+    top: -4px;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+    animation: signpost-bob 2s ease-in-out infinite;
+}
+@keyframes signpost-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-1px) rotate(2deg); }
+}
+.toc-section-link.active .toc-signpost {
+    display: block;
+}
+.toc-flywheel {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 10px;
+    color: var(--faint);
+}
+.toc-flywheel .flywheel-arrow {
+    color: var(--copper);
+    font-size: 14px;
+}
+.main-content-area {
+    margin-left: 250px;
+    flex: 1;
+    min-width: 0;
+}
+
+.explore-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    position: sticky;
+    top: 50px;
+    z-index: 90;
+    backdrop-filter: blur(12px);
+}
+.explore-bar .container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+.explore-bar label {
+    font-size: 12px;
+    color: var(--dim);
+    font-weight: 500;
+    white-space: nowrap;
+}
+.foveation-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 5px;
+    background: linear-gradient(to right, var(--copper), var(--gold));
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+.foveation-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+.fov-label {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    min-width: 70px;
+}
+.lang-select {
+    font-size: 11px;
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    margin-left: 8px;
+}
+.lang-label {
+    font-size: 11px;
+    color: var(--dim);
+    margin-left: 12px;
+}
+.filter-btn {
+    font-size: 11px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--dim);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.filter-btn.active {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+}
+.filter-btn:hover { border-color: var(--copper); }
+
+.status-bar {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-left: auto;
+}
+.status-pill {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+.status-pill.supported { background: rgba(74,122,50,0.12); color: var(--green); }
+.status-pill.conjecture { background: rgba(184,115,51,0.12); color: var(--copper); }
+
+.part-header {
+    margin: 28px 0 4px;
+    padding: 10px 0 8px;
+    border-bottom: 2px solid var(--border-h);
+}
+.part-header h1 {
+    font-family: var(--serif);
+    font-size: 1.5em;
+    color: var(--gold);
+    font-weight: 400;
+}
+.part-header .part-sub {
+    font-size: 0.85em;
+    color: var(--dim);
+    margin-top: 2px;
+}
+
+.section-block {
+    margin: 18px 0;
+    padding: 0;
+}
+.section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.section-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    opacity: 0.7;
+}
+.section-header h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.15em;
+}
+.section-number {
+    font-size: 0.7em;
+    color: var(--copper);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 1px;
+    font-family: var(--sans);
+}
+
+.idea-card {
+    margin: 6px 0;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-radius: 6px;
+    border-left: 3px solid var(--border);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+.idea-card:hover {
+    background: var(--raised);
+    border-left-color: var(--copper);
+}
+.idea-card.expanded {
+    border-left-color: var(--gold);
+    background: var(--raised);
+}
+.idea-card .idea-surface {
+    font-size: 0.88em;
+    line-height: 1.55;
+    color: var(--text);
+}
+.idea-card .idea-core {
+    font-size: 0.8em;
+    color: var(--dim);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.idea-card .idea-depth {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    line-height: 1.6;
+    color: var(--dim);
+    display: none;
+}
+.idea-card.expanded .idea-depth { display: block; }
+.idea-card .idea-evidence {
+    margin-top: 6px;
+    font-size: 0.75em;
+    color: var(--faint);
+    font-style: italic;
+}
+.idea-card .idea-status {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+.footnote-mark {
+    font-size: 13px;
+    color: var(--copper);
+    cursor: pointer;
+    font-weight: 600;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 2px;
+    transition: color 0.2s;
+}
+.footnote-mark:hover { color: var(--accent); }
+.footnote-mark.supported { color: var(--green); }
+.footnote-detail {
+    display: none;
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: rgba(138,108,24,0.04);
+    border-left: 2px solid var(--border);
+    font-size: 0.78em;
+    color: var(--dim);
+    line-height: 1.5;
+    border-radius: 0 4px 4px 0;
+}
+.footnote-detail.visible { display: block; }
+.footnote-detail .fn-label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--copper);
+    margin-right: 4px;
+}
+.footnote-detail .fn-label.supported { color: var(--green); }
+.idea-card .zoom-hint {
+    font-size: 10px;
+    color: var(--faint);
+    margin-top: 4px;
+    text-align: right;
+}
+.idea-card.expanded .zoom-hint { display: none; }
+
+.idea-links {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.idea-link {
+    font-size: 10px;
+    padding: 1px 7px;
+    background: rgba(138,108,24,0.08);
+    color: var(--gold);
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.idea-link:hover { background: rgba(138,108,24,0.18); }
+
+.section-fact {
+    font-size: 0.82em;
+    color: var(--dim);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    background: rgba(138,108,24,0.04);
+    border-radius: 5px;
+}
+.section-falsification {
+    font-size: 0.78em;
+    color: var(--faint);
+    margin-top: 10px;
+    padding: 6px 10px;
+    border-left: 2px solid var(--border);
+    font-style: italic;
+}
+
+.conjecture-block {
+    margin: 12px 0;
+    padding: 12px 12px 12px 16px;
+    background: rgba(184,115,51,0.04);
+    border: 1px solid rgba(184,115,51,0.15);
+    border-radius: 6px;
+    position: relative;
+}
+.conjecture-block h3 {
+    color: var(--copper);
+    font-size: 0.95em;
+    margin-bottom: 2px;
+}
+.conjecture-block .conj-date { font-size: 0.75em; color: var(--faint); }
+.conjecture-block .conj-source { font-size: 0.8em; color: var(--dim); margin: 4px 0; }
+.conjecture-block .conj-fact { font-size: 0.85em; line-height: 1.55; color: var(--text); }
+
+.meta-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.meta-link {
+    font-size: 11px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--dim);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.meta-link:hover { border-color: var(--copper); color: var(--accent); }
+.meta-link.primary { background: var(--gold); color: #fff; border-color: var(--gold); }
+.meta-link.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+.working-notice {
+    text-align: center;
+    padding: 14px;
+    margin: 16px 0;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px dashed var(--border);
+}
+.working-notice p { font-size: 0.82em; color: var(--dim); line-height: 1.5; }
+.working-notice strong { color: var(--accent); }
+
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    margin: 12px 0;
+}
+.author-card {
+    padding: 8px 10px;
+    background: var(--surface);
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+.author-card .author-name { font-weight: 600; color: var(--accent); }
+.author-card .author-contrib { color: var(--dim); margin-top: 2px; font-size: 0.9em; }
+
+footer.explore-footer {
+    text-align: center;
+    padding: 24px 0;
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    color: var(--faint);
+    font-size: 0.8em;
+}
+
+@media (max-width: 768px) {
+    .toc-sidebar { display: none; }
+    .main-content-area { margin-left: 0; }
+    .explore-bar .container { flex-direction: column; gap: 8px; }
+    .status-bar { margin-left: 0; }
+    .foveation-slider { width: 120px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="index.html" class="site-title">Follow the Five Percent</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html" class="active">Explore</a></li>
+            <li><a href="https://theshapeofthought.com" rel="noopener">The Shape of Thought</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="explore-bar">
+    <div class="container">
+        <label for="foveation">Foveation</label>
+        <input type="range" id="foveation" class="foveation-slider" min="0" max="2" step="1" value="1">
+        <span id="fov-label" class="fov-label">General</span>
+
+        <span class="lang-label">Language</span>
+        <select id="lang-select" class="lang-select" onchange="setLanguage(this.value)">
+            <option value="en" selected>English</option>
+            <option value="he">&#x05E2;&#x05D1;&#x05E8;&#x05D9;&#x05EA; (Hebrew)</option>
+            <option value="zh">&#x4E2D;&#x6587; (Mandarin)</option>
+        </select>
+
+        <button id="btn-conjectures" class="filter-btn active" onclick="toggleConjectures()">Conjectures</button>
+
+        <div class="status-bar">
+            <span class="status-pill supported" id="count-supported"></span>
+            <span class="status-pill conjecture" id="count-conjecture"></span>
+        </div>
+    </div>
+</div>
+
+<div class="explore-layout">
+
+<aside class="toc-sidebar" id="toc-sidebar">
+    <div id="toc-content"></div>
+    <div class="toc-flywheel">
+        <span class="flywheel-arrow">&#8635;</span> same graph, different projection
+    </div>
+</aside>
+
+<div class="main-content-area">
+
+<header class="hero" style="padding: 28px 0 20px;">
+    <div class="container">
+        <h1 style="font-size:1.8em;">Follow the Five Percent</h1>
+        <p class="subtitle" style="font-style:italic; font-size:0.95em; margin-bottom:4px;">What Graph-Literate Enterprises Did Differently and Why It Matters</p>
+        <p class="subtitle" style="font-size:0.82em;">The shapes are the facts. The rest is projection. Any depth, any language - same graph.</p>
+        <div style="margin-top:12px;" class="meta-links">
+            <a href="index.html" class="meta-link primary">Paper</a>
+            <a href="https://theshapeofthought.com" class="meta-link" rel="noopener">The Shape of Thought</a>
+            <a href="https://agilemesh.net" class="meta-link" rel="noopener">AgileMesh</a>
+        </div>
+    </div>
+</header>
+
+<div class="working-notice" id="living-notice">
+    <div class="container">
+        <p><strong>This is a living, graph-driven formulation.</strong> Each idea card is a node. Each cross-link is an edge. The foveation slider changes the projection depth - from headline to full evidence. Language changes the surface - the graph underneath is the same. The ideas stand; only the projection changes.</p>
+    </div>
+</div>
+
+<main class="page-content">
+    <div class="container" id="content">
+        <p style="text-align:center; color:var(--faint); padding:20px;">Loading from graph...</p>
+    </div>
+</main>
+
+<footer class="explore-footer">
+    <div class="container">
+        <p>Peter Cooper - CC BY 4.0 - 2026</p>
+        <p style="margin-top:4px;">Generated from graph. <span id="node-count"></span> ideas, <span id="link-count"></span> connections.</p>
+        <p style="margin-top:4px; font-style:italic; font-size:0.9em;">Biology settled the question long before enterprise software existed.</p>
+    </div>
+</footer>
+
+</div>
+</div>
+
+<script>
+var graphData = null;
+var showConjectures = true;
+var foveationLevel = 1;
+var currentLang = 'en';
+var translations = {};
+
+function setLanguage(lang) {
+    if (lang === 'en') {
+        currentLang = 'en';
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+        render();
+        return;
+    }
+    if (translations[lang]) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+        render();
+        return;
+    }
+    fetch('follow-five-graph-' + lang + '.json')
+        .then(function(r) {
+            if (!r.ok) throw new Error('not found');
+            return r.json();
+        })
+        .then(function(data) {
+            translations[lang] = data;
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+            render();
+        })
+        .catch(function() {
+            document.getElementById('lang-select').value = currentLang;
+            var toast = document.createElement('div');
+            toast.textContent = 'Translation coming soon. Same graph, different surface.';
+            toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:12px 20px;border-radius:8px;font-size:13px;max-width:400px;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+            document.body.appendChild(toast);
+            setTimeout(function() { toast.remove(); }, 4000);
+        });
+}
+
+var iconMap = {
+    'Section I': '&#x1F4CA;',
+    'Section II': '&#x26A1;',
+    'Section III': '&#x1F697;',
+    'Section IV': '&#x26C8;',
+    'Section V': '&#x1F4CB;',
+    'Section VI': '&#x1F393;',
+    'Section VII': '&#x1F410;',
+    'Section VIII': '&#x1F30D;',
+    'Section IX': '&#x1F4B0;',
+    'Section X': '&#x1F4A5;',
+    'Section XI': '&#x1F331;',
+    'Section XII': '&#x1F5FA;'
+};
+
+var fovLabels = ['Headlines', 'General', 'Full Evidence'];
+var sectionObserver = null;
+
+document.getElementById('foveation').addEventListener('input', function() {
+    foveationLevel = parseInt(this.value);
+    document.getElementById('fov-label').textContent = fovLabels[foveationLevel];
+    render();
+});
+
+function toggleConjectures() {
+    showConjectures = !showConjectures;
+    document.getElementById('btn-conjectures').classList.toggle('active', showConjectures);
+    render();
+}
+
+function scrollToSection(sectionId) {
+    var el = document.getElementById(sectionId);
+    if (el) {
+        var top = el.getBoundingClientRect().top + window.pageYOffset - 110;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+}
+
+function scrollToIdea(ideaId) {
+    var el = document.getElementById('idea-' + ideaId);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('expanded');
+        setTimeout(function() { el.classList.remove('expanded'); }, 5000);
+    }
+}
+
+function toggleIdea(el) { el.classList.toggle('expanded'); }
+function toggleFootnote(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('visible');
+}
+
+function getLinksForIdea(ideaId) {
+    var data = getCurrentData();
+    if (!data || !data.links) return [];
+    return data.links.filter(function(l) { return l.from_id === ideaId || l.to_id === ideaId; });
+}
+
+function getCurrentData() {
+    if (currentLang !== 'en' && translations[currentLang]) return translations[currentLang];
+    return graphData;
+}
+
+function shortTitle(title) {
+    return title.replace(/^The /, '').split(' - ')[0].substring(0, 35);
+}
+
+function getConjecturesForSection(sectionLabel) {
+    var data = getCurrentData();
+    if (!data || !data.conjectures) return [];
+    var roman = sectionLabel.replace('Section ', '');
+    return data.conjectures.filter(function(c) {
+        return c.supports && c.supports.indexOf(roman) !== -1;
+    });
+}
+
+function buildToc() {
+    var data = getCurrentData();
+    if (!data) return;
+    var html = '';
+    data.parts.forEach(function(part, pi) {
+        var partId = 'part-' + pi;
+        html += '<div class="toc-part">';
+        html += '<div class="toc-part-title" onclick="scrollToSection(\'' + partId + '\')">' + part.title + '</div>';
+        part.sections.forEach(function(section, si) {
+            var secId = 'sec-' + pi + '-' + si;
+            html += '<a class="toc-section-link" data-section="' + secId + '" onclick="scrollToSection(\'' + secId + '\')">';
+            html += shortTitle(section.title);
+            html += '<svg class="toc-signpost" width="22" height="28" viewBox="0 0 22 28">'
+                + '<rect x="9" y="8" width="4" height="20" rx="1" fill="#5C3D14"/>'
+                + '<rect x="10" y="8" width="1.5" height="20" rx="0.5" fill="#8A6C18" opacity="0.5"/>'
+                + '<rect x="9" y="5" width="6" height="4" rx="1" fill="#5C3D14"/>'
+                + '<g transform="rotate(-8 11 4)">'
+                + '<rect x="0" y="0" width="20" height="10" rx="2" fill="#8A6C18"/>'
+                + '<rect x="0.5" y="0.5" width="19" height="9" rx="1.5" fill="#B87333"/>'
+                + '<rect x="0.5" y="0.5" width="19" height="2" rx="1" fill="#D4A04A" opacity="0.5"/>'
+                + '<polygon points="18,5 22,3 22,7" fill="#B87333"/>'
+                + '<polygon points="18,5 22,3.5 22,6.5" fill="#8A6C18" opacity="0.4"/>'
+                + '<text x="10" y="7" text-anchor="middle" font-size="4.5" fill="#2B1800" font-weight="bold" font-family="serif">YOU ARE HERE</text>'
+                + '</g>'
+                + '<circle cx="7" cy="27" r="1.5" fill="#4a7a32" opacity="0.6"/>'
+                + '<circle cx="11" cy="27.5" r="1" fill="#4a7a32" opacity="0.4"/>'
+                + '<circle cx="15" cy="27" r="1.2" fill="#4a7a32" opacity="0.5"/>'
+                + '</svg>';
+            html += '</a>';
+        });
+        html += '</div>';
+    });
+    document.getElementById('toc-content').innerHTML = html;
+}
+
+function setupScrollSpy() {
+    if (sectionObserver) sectionObserver.disconnect();
+    var sections = document.querySelectorAll('.section-block[id]');
+    if (!sections.length) return;
+
+    sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.toc-section-link').forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                var link = document.querySelector('.toc-section-link[data-section="' + entry.target.id + '"]');
+                if (link) {
+                    link.classList.add('active');
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(function(sec) { sectionObserver.observe(sec); });
+}
+
+function render() {
+    var data = getCurrentData();
+    if (!data) return;
+    var container = document.getElementById('content');
+    var html = '';
+    var totalIdeas = 0;
+    var supportedCount = 0;
+    var conjectureCount = 0;
+    var renderedConjs = {};
+    var fnCounter = 0;
+    var fnMarks = ['§', '†', '‡', '¶', '§§', '††', '‡‡', '¶¶'];
+
+    data.parts.forEach(function(part, pi) {
+        html += '<div class="part-header" id="part-' + pi + '"><h1>' + part.title + '</h1>';
+        html += '<div class="part-sub">' + (part.subtitle || '') + '</div></div>';
+
+        part.sections.forEach(function(section, si) {
+            var secId = 'sec-' + pi + '-' + si;
+            var icon = iconMap[section.section] || '&#x1F4CC;';
+            html += '<div class="section-block" id="' + secId + '">';
+            html += '<div class="section-header">';
+            html += '<div class="section-icon">' + icon + '</div>';
+            html += '<div><span class="section-number">' + section.section + '</span>';
+            html += '<h2>' + section.title + '</h2></div></div>';
+
+            if (foveationLevel >= 1 && section.bare_fact) {
+                html += '<div class="section-fact">' + section.bare_fact + '</div>';
+            }
+
+            (section.ideas || []).forEach(function(idea) {
+                if (!idea.id) return;
+                var isConj = idea.status && idea.status.indexOf('conjecture') !== -1;
+                if (isConj) conjectureCount++; else supportedCount++;
+                if (isConj && !showConjectures) return;
+                totalIdeas++;
+                var links = getLinksForIdea(idea.id);
+
+                var fnId = 'fn-' + fnCounter;
+                var fnMark = fnMarks[fnCounter % fnMarks.length];
+                fnCounter++;
+                var fnClass = isConj ? '' : ' supported';
+
+                html += '<div class="idea-card" id="idea-' + idea.id + '" onclick="toggleIdea(this)">';
+                html += '<div class="idea-core">' + idea.idea;
+                html += '<span class="footnote-mark' + fnClass + '" onclick="event.stopPropagation(); toggleFootnote(\'' + fnId + '\')" title="' + (isConj ? 'conjecture - valid until proven wrong' : 'supported') + '">' + fnMark + '</span>';
+                html += '</div>';
+
+                if (foveationLevel === 0 && idea.surface) {
+                    html += '<div class="idea-surface">' + idea.surface + '</div>';
+                } else if (foveationLevel === 1) {
+                    if (idea.surface) html += '<div class="idea-surface">' + idea.surface + '</div>';
+                    html += '<div class="idea-depth">';
+                    if (idea.depth) html += '<p>' + idea.depth + '</p>';
+                    if (idea.evidence) html += '<div class="idea-evidence">' + idea.evidence + '</div>';
+                    if (links.length) {
+                        html += '<div class="idea-links">';
+                        links.forEach(function(l) {
+                            var target = l.from_id === idea.id ? l.to_id : l.from_id;
+                            html += '<span class="idea-link" onclick="event.stopPropagation(); scrollToIdea(\'' + target + '\')">' + l.rel_type.replace(/_/g,' ').toLowerCase() + '</span>';
+                        });
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                    html += '<div class="zoom-hint">click to expand</div>';
+                } else if (foveationLevel === 2) {
+                    if (idea.depth) html += '<div class="idea-surface">' + idea.depth + '</div>';
+                    if (idea.evidence) html += '<div class="idea-evidence">' + idea.evidence + '</div>';
+                    if (links.length) {
+                        html += '<div class="idea-links">';
+                        links.forEach(function(l) {
+                            var target = l.from_id === idea.id ? l.to_id : l.from_id;
+                            html += '<span class="idea-link" onclick="event.stopPropagation(); scrollToIdea(\'' + target + '\')">' + l.rel_type.replace(/_/g,' ').toLowerCase() + '</span>';
+                        });
+                        html += '</div>';
+                    }
+                }
+
+                html += '<div class="footnote-detail" id="' + fnId + '">';
+                html += '<span class="fn-label' + fnClass + '">' + fnMark + '</span> ';
+                if (isConj) {
+                    html += '<em>Conjecture</em> - valid until proven wrong.';
+                } else {
+                    html += '<em>Supported</em> - convergent evidence from independent sources.';
+                }
+                if (idea.evidence) html += ' <br>' + idea.evidence;
+                html += '</div>';
+
+                html += '</div>';
+            });
+
+            if (foveationLevel >= 2 && section.falsification && section.falsification.indexOf('N/A') === -1) {
+                html += '<div class="section-falsification">' + section.falsification + '</div>';
+            }
+
+            var sectionConjs = showConjectures ? getConjecturesForSection(section.section) : [];
+            sectionConjs.forEach(function(c) {
+                if (renderedConjs[c.id]) return;
+                renderedConjs[c.id] = true;
+                html += '<div class="conjecture-block">';
+                html += '<h3>' + c.id + '. ' + c.title + '</h3>';
+                html += '<div class="conj-date">' + (c.date || '') + '</div>';
+                if (foveationLevel >= 1 && c.source) html += '<div class="conj-source">Source: ' + c.source + '</div>';
+                html += '<div class="conj-fact">' + c.bare_fact + '</div>';
+                if (foveationLevel >= 2 && c.supports) html += '<div class="idea-evidence">Supports: ' + c.supports + '</div>';
+                html += '</div>';
+            });
+
+            html += '</div>';
+        });
+    });
+
+    if (foveationLevel >= 1 && data.authors && data.authors.length) {
+        html += '<div class="part-header"><h1>Convergent Observers</h1>';
+        html += '<div class="part-sub">Independent vantages of the same landscape.</div></div>';
+        html += '<div class="author-grid">';
+        data.authors.forEach(function(a) {
+            html += '<div class="author-card"><div class="author-name">' + a.name + '</div>';
+            html += '<div class="author-contrib">' + a.contribution + '</div>';
+            if (foveationLevel >= 2 && a.relevance) html += '<div class="idea-evidence" style="margin-top:4px;">' + a.relevance + '</div>';
+            html += '</div>';
+        });
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+    document.getElementById('count-supported').textContent = supportedCount + ' supported';
+    document.getElementById('count-conjecture').textContent = conjectureCount + ' conjecture';
+    document.getElementById('node-count').textContent = totalIdeas;
+    document.getElementById('link-count').textContent = data.links ? data.links.length : 0;
+
+    buildToc();
+    setupScrollSpy();
+}
+
+fetch('follow-five-graph.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) { graphData = data; render(); })
+    .catch(function(err) {
+        document.getElementById('content').innerHTML = '<p style="color:var(--accent);text-align:center;padding:20px;">Could not load graph data: ' + err.message + '</p>';
+    });
+</script>
+</body>
+</html>
