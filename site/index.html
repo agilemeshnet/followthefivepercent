@@ -10,81 +10,211 @@
 <meta property="og:type" content="article">
 <link rel="stylesheet" href="style.css">
 <style>
-.manifesto {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 60px 20px 40px;
-}
-.manifesto h1 {
-    font-family: var(--serif);
-    font-size: 2.4em;
-    color: var(--gold);
-    font-weight: 400;
-    margin-bottom: 6px;
-    line-height: 1.2;
-}
-.manifesto .byline {
-    font-size: 0.85em;
-    color: var(--dim);
-    margin-bottom: 30px;
-}
-.manifesto .opener {
-    font-size: 1.3em;
-    color: var(--accent);
+nav .container { max-width: 1200px; }
+nav .nav-links a.highlight {
+    background: var(--gold);
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 4px;
     font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 1.5em;
+}
+nav .nav-links a.highlight:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.magazine {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 24px 40px;
+    gap: 36px;
+    align-items: start;
+}
+
+.toc {
+    position: sticky;
+    top: 70px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    padding: 8px 0;
+}
+.toc-title {
     font-family: var(--serif);
-}
-.manifesto p {
-    font-size: 1.05em;
-    line-height: 1.85;
-    margin-bottom: 1.2em;
-}
-.manifesto .closer {
-    font-size: 1.4em;
+    font-size: 0.82em;
+    font-weight: 700;
     color: var(--gold);
-    font-weight: 600;
-    margin-top: 2em;
-    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
 }
-.manifesto .split {
-    margin-top: 1.5em;
-    padding: 20px 24px;
-    background: var(--surface);
-    border-radius: 8px;
-    border-left: 4px solid var(--copper);
+.toc a {
+    display: block;
+    padding: 6px 0 6px 12px;
+    font-size: 0.82em;
+    color: var(--dim);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+    transition: all 0.2s;
 }
-.manifesto .split p {
-    margin-bottom: 0.6em;
-}
-.manifesto .split .lose {
-    color: var(--faint);
-}
-.manifesto .split .win {
+.toc a:hover {
     color: var(--accent);
+}
+.toc a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
     font-weight: 500;
 }
 
-/* Quote boxout */
+.mag-main {
+    min-width: 0;
+}
+
+.mag-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: center;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+}
+.mag-section:first-child {
+    padding-top: 0;
+}
+.mag-section:last-of-type {
+    border-bottom: none;
+}
+
+.mag-text h1 {
+    font-family: var(--serif);
+    font-size: 2.2em;
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+.mag-text .byline {
+    font-size: 0.85em;
+    color: var(--dim);
+    margin-bottom: 20px;
+}
+.mag-text p {
+    font-size: 1.02em;
+    line-height: 1.85;
+    margin-bottom: 1em;
+}
+.mag-text p:last-child {
+    margin-bottom: 0;
+}
+.mag-text .opener {
+    font-size: 1.2em;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1.5;
+    font-family: var(--serif);
+}
+.mag-text .closer {
+    font-size: 1.3em;
+    color: var(--gold);
+    font-weight: 600;
+    font-family: var(--serif);
+    margin-top: 0.8em;
+}
+
+.mag-media img {
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 16px rgba(26,23,20,0.08);
+    display: block;
+}
+.mag-media figcaption {
+    font-size: 0.78em;
+    color: var(--faint);
+    font-family: var(--serif);
+    font-style: italic;
+    margin-top: 6px;
+}
+
+.hero-media {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.video-thumb {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.video-thumb img {
+    width: 100%;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    transition: filter 0.3s;
+}
+.video-thumb:hover img {
+    filter: brightness(0.85);
+}
+.play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4px;
+    transition: background 0.3s;
+}
+.video-thumb:hover .play-btn {
+    background: rgba(191,91,22,0.9);
+}
+.video-caption {
+    padding: 16px 20px;
+}
+.video-caption h3 {
+    font-family: var(--serif);
+    font-size: 1.05em;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 4px;
+}
+.video-caption h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+.video-caption p {
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: var(--dim);
+    margin: 0;
+}
+
 .quote-boxout {
-    margin: 2em 0 2.5em;
-    padding: 32px 36px;
+    padding: 24px 28px;
     background: var(--surface);
     border-left: 5px solid var(--gold);
     border-radius: 0 10px 10px 0;
     font-family: var(--serif);
-    font-size: 1.15em;
-    line-height: 1.75;
+    font-size: 1em;
+    line-height: 1.7;
     color: var(--text);
     position: relative;
 }
 .quote-boxout::before {
     content: "\201C";
     position: absolute;
-    top: 12px;
-    left: 12px;
-    font-size: 3em;
+    top: 8px; left: 10px;
+    font-size: 2.5em;
     color: var(--gold);
     opacity: 0.3;
     font-family: var(--serif);
@@ -92,70 +222,44 @@
 }
 .quote-boxout p {
     font-size: 1em;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.7em;
 }
-.quote-boxout p:last-child {
-    margin-bottom: 0;
-}
-.quote-boxout .quote-cta {
+.quote-boxout p:last-child { margin-bottom: 0; }
+.quote-cta {
     font-weight: 600;
     color: var(--gold);
-    font-size: 1.15em;
-    margin-top: 0.6em;
+    font-size: 1.1em;
+    margin-top: 0.5em;
 }
 
-/* Inline figure - text wraps around image, alternating sides */
-.fig-inline {
-    margin: 1.8em 0;
-    overflow: hidden;
+.split {
+    padding: 20px 24px;
+    background: var(--surface);
+    border-radius: 8px;
+    border-left: 4px solid var(--copper);
+    margin-top: 1em;
 }
-.fig-inline img {
-    width: 45%;
-    max-width: 380px;
-    height: auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 16px rgba(26,23,20,0.08);
+.split .win {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 1.02em;
+    line-height: 1.85;
+    margin-bottom: 0.6em;
 }
-.fig-inline figcaption {
-    font-size: 0.78em;
-    color: var(--faint);
-    font-family: var(--serif);
-    font-style: italic;
-    margin-top: 6px;
+.split p {
+    font-size: 1.02em;
+    line-height: 1.85;
+    margin-bottom: 0.6em;
 }
-.fig-inline.left img {
-    float: left;
-    margin: 0 24px 16px 0;
-}
-.fig-inline.left figcaption {
-    float: left;
-    clear: left;
-    width: 45%;
-    max-width: 380px;
-    margin-right: 24px;
-    margin-bottom: 16px;
-}
-.fig-inline.right img {
-    float: right;
-    margin: 0 0 16px 24px;
-}
-.fig-inline.right figcaption {
-    float: right;
-    clear: right;
-    width: 45%;
-    max-width: 380px;
-    margin-left: 24px;
-    margin-bottom: 16px;
-    text-align: right;
-}
+.split p:last-child { margin-bottom: 0; }
 
 .cta-row {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-top: 2em;
-    padding-top: 2em;
+    padding: 28px 0 0;
     border-top: 1px solid var(--border);
+    margin-top: 12px;
 }
 .cta-btn {
     padding: 10px 24px;
@@ -184,33 +288,61 @@ footer {
     border-top: 1px solid var(--border);
     color: var(--faint);
     font-size: 0.82em;
-    max-width: 960px;
-    margin: 40px auto 0;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-    .fig-inline img {
-        width: 100%;
-        max-width: 100%;
-        float: none !important;
-        margin: 0 0 8px 0 !important;
+@media (max-width: 960px) {
+    .magazine {
+        grid-template-columns: 160px 1fr;
+        gap: 24px;
+        padding: 24px 16px 30px;
     }
-    .fig-inline figcaption {
-        float: none !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 0 16px 0 !important;
-        text-align: left !important;
+}
+@media (max-width: 768px) {
+    .magazine {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 30px;
+    }
+    .toc {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 16px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 8px;
+    }
+    .toc-title {
+        width: 100%;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+    }
+    .toc a {
+        padding: 4px 8px;
+        border-left: none;
+        font-size: 0.8em;
+    }
+    .toc a.active {
+        border-left: none;
+        background: var(--surface);
+        border-radius: 4px;
+    }
+    .mag-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px 0;
+    }
+    .mag-text h1 {
+        font-size: 1.7em;
     }
     .quote-boxout {
-        padding: 24px 20px;
-        font-size: 1em;
-    }
-    .manifesto {
-        padding: 40px 16px 30px;
+        padding: 20px;
+        font-size: 0.92em;
     }
 }
 </style>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2ccbe9fb74114276a5ba1b3fcaa4b2f1"}'></script>
 </head>
 <body>
 
@@ -218,88 +350,199 @@ footer {
     <div class="container">
         <a href="index.html" class="site-title">Follow the Five Percent</a>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Manifesto</a></li>
-            <li><a href="paper.html">Paper</a></li>
-            <li><a href="#listen">Listen</a></li>
-            <li><a href="mandarin.html">&#20013;&#25991;</a></li>
-            <li><a href="explore.html">Explore</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="paper.html" class="highlight">Paper</a></li>
             <li><a href="https://agilemesh.net" rel="noopener">AgileMesh</a></li>
         </ul>
     </div>
 </nav>
 
-<div class="manifesto">
+<div class="magazine">
 
-<figure class="plate plate-hero" style="margin:0 0 2em; text-align:center;">
-    <img src="img/plate-0-cover.jpg" alt="Follow the Five Percent - architectural sciagraphy of a data ziggurat" loading="eager" style="max-width:520px; width:100%; box-shadow:0 4px 24px rgba(26,23,20,0.12); border-radius:4px;">
-</figure>
+    <nav class="toc">
+        <div class="toc-title">The Five Percent</div>
+        <a href="#listen" class="active">Space Goats</a>
+        <a href="#visible">The Band-Aid</a>
+        <a href="#winners">Two Seconds</a>
+        <a href="#conditions">The Code</a>
+        <a href="#money">Six Times</a>
+        <a href="#walk">Own People</a>
+        <a href="#goats">The 95%</a>
+        <a href="#overlay">The Duty</a>
+        <a href="#shepherd">The Shepherd</a>
+    </nav>
 
-<h1>The Five Percent Manifesto</h1>
-<p class="byline">Peter Cooper - AgileMesh - May 2026</p>
+    <main class="mag-main">
 
-<div class="quote-boxout">
-<p>The 5% will connect their data, empower their staff, and own their intelligence.</p>
-<p>The 5% are not smarter. They are not better funded. They simply noticed, at some point, that the world is made of relationships, and built their systems to remember that. The other 95% are still extracting it into rows, one cell at a time, and wondering why the model cannot tell them anything they did not already know.</p>
-<p class="quote-cta">Instead of farming out intelligence - grow your own.</p>
-</div>
+        <!-- HERO: 5% quote box left | Goats right -->
+        <section id="listen" class="mag-section">
+            <div class="mag-text">
+                <h1>Follow the Five Percent</h1>
+                <p class="byline">Peter Cooper - AgileMesh - May 2026</p>
+                <div class="quote-boxout">
+                    <p>The 5% will connect their data, empower their staff, and own their intelligence.</p>
+                    <p>The 5% are not smarter. They are not better funded. They simply noticed, at some point, that the world is made of relationships, and built their systems to remember that.</p>
+                    <p class="quote-cta">Instead of farming out intelligence - grow your own.</p>
+                </div>
+            </div>
+            <div class="hero-media" style="padding:0;">
+                <div style="padding:20px 20px 0;">
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
+                        <div style="width:56px;height:56px;border-radius:8px;background:var(--raised);border:1px solid var(--border-h);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;">&#128016;</div>
+                        <div>
+                            <h3 style="font-family:var(--serif);font-size:0.95em;font-weight:400;color:var(--gold);margin:0;">Space Goats: Beyond the Table Ladders</h3>
+                            <span style="font-size:0.75em;color:var(--faint);">Episode 1 - 16 min - May 2026</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <button id="heroPlayBtn" onclick="heroToggle()" style="width:40px;height:40px;border-radius:50%;border:2px solid var(--copper);background:transparent;color:var(--copper);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;">&#9654;</button>
+                        <div style="flex:1;display:flex;flex-direction:column;gap:3px;">
+                            <div id="heroProgress" onclick="heroSeek(event)" style="width:100%;height:5px;background:var(--border);border-radius:3px;cursor:pointer;overflow:hidden;">
+                                <div id="heroFill" style="height:100%;background:linear-gradient(90deg,var(--copper),var(--gold));border-radius:3px;width:0%;transition:width 0.3s;"></div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--faint);font-family:var(--mono);">
+                                <span id="heroTime">0:00</span>
+                                <span id="heroDur">16:31</span>
+                            </div>
+                        </div>
+                        <button id="heroSpeed" onclick="heroSpeedCycle()" style="background:var(--raised);border:1px solid var(--border);color:var(--dim);font-size:10px;padding:3px 8px;border-radius:10px;cursor:pointer;">1x</button>
+                    </div>
+                </div>
+                <div class="video-caption">
+                    <p style="margin:0;">Two critics dissect the goat metaphor, the shepherd in the dirt, and the executive who strapped a space helmet onto a piece of livestock.</p>
+                    <p style="margin:6px 0 0;"><a href="goats.html" style="color:var(--accent);font-size:0.85em;">The Funny Goat Bits &rarr;</a></p>
+                </div>
+                <audio id="heroAudio" preload="metadata">
+                    <source src="img/space-goats-podcast.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </section>
 
-<p class="opener">The era of the GBP 330 million band-aid is over.</p>
+        <!-- Cover left | Text right -->
+        <section id="visible" class="mag-section">
+            <figure class="mag-media">
+                <img src="img/cover-landscape.jpg" alt="Follow the Five Percent - What Graph-Literate Enterprises Did Differently" loading="eager">
+            </figure>
+            <div class="mag-text">
+                <p class="opener">The era of the GBP 330 million band-aid is over.</p>
+                <p>For decades, the Great SQL Monoculture has kept our enterprise data tied up like obstinate goats in a paddock, facing different directions and resolutely refusing to mingle. And for decades, the insurance industry and the NHS have paid a staggering premium to external consultants just to tell us what those isolated goats are thinking.</p>
+            </div>
+        </section>
 
-<figure class="fig-inline left">
-    <img src="img/plate-1-visible-submerged.jpg" alt="Plate I - The Visible and the Submerged" loading="lazy">
-    <figcaption>Plate I - The Visible and the Submerged</figcaption>
-</figure>
+        <!-- The Winners: stats left | claim walk right -->
+        <section id="winners" class="mag-section">
+            <div class="mag-text">
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">The Two-Second Claim</h2>
+                <p>A customer files a claim. Lemonade's AI reads it, checks the policy, runs 18 fraud algorithms, and sends the money. That takes <strong>two seconds</strong>. The same claim at a typical UK insurer takes 25 to 30 days.</p>
+                <p>Root Insurance connects drivers to their driving through live telematics. Revenue: <strong>$1.52 billion</strong>, up 29% in a year. Allianz Australia processes storm claims in <strong>under 5 minutes</strong>. AXA Switzerland hits greater than <strong>99% accuracy</strong> in automated claims triage.</p>
+                <p>Four companies. Four different tech stacks. One thing in common: they kept the connections in their data alive.</p>
+            </div>
+            <figure class="mag-media">
+                <img src="img/live-wire-claim.png" alt="Connected claim processing - the live wire" loading="lazy">
+                <figcaption>The chain is unbroken. The AI walks along it.</figcaption>
+            </figure>
+        </section>
 
-<p>For decades, the Great SQL Monoculture has kept our enterprise data tied up like obstinate goats in a paddock, facing different directions and resolutely refusing to mingle. And for decades, the insurance industry and the NHS have paid a staggering premium to external consultants just to tell us what those isolated goats are thinking.</p>
+        <!-- Text left | Plate I right -->
+        <section id="conditions" class="mag-section">
+            <div class="mag-text">
+                <p>But the 5% of companies that are actually succeeding with AI - the Lemonades, the Roots, the forward-thinking institutions - have cracked the code. They are not buying better algorithms or more expensive black boxes. They are building better environments. They are tearing down the fences, unclipping the carabiners, and letting their data connect in rich, semantic graphs.</p>
+            </div>
+            <figure class="mag-media">
+                <img src="img/plate-1-visible-submerged.jpg" alt="Plate I - The Visible and the Submerged" loading="lazy">
+                <figcaption>Plate I - The Visible and the Submerged</figcaption>
+            </figure>
+        </section>
 
-<p>But the 5% of companies that are actually succeeding with AI - the Lemonades, the Roots, the forward-thinking institutions - have cracked the code. They are not buying better algorithms or more expensive black boxes. They are building better environments. They are tearing down the fences, unclipping the carabiners, and letting their data connect in rich, semantic graphs.</p>
+        <!-- The Money: iceberg left | text right -->
+        <section id="money" class="mag-section">
+            <figure class="mag-media">
+                <img src="img/iceberg-5-vs-95.png" alt="The 5% iceberg - visible success, submerged failure" loading="lazy">
+                <figcaption>5% visible. 95% submerged.</figcaption>
+            </figure>
+            <div class="mag-text">
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">Six Times</h2>
+                <p>McKinsey found that AI-leading insurers created <strong>6.1 times the total shareholder return</strong> of laggards over five years. Not 6.1 percent. Six times.</p>
+                <p>The AI in insurance market is projected to reach <strong>$175 to $303 billion by 2035</strong>. Deloitte projects $160 billion in savings from fraud analytics alone. That money will go somewhere. The only question is whose AI can reason about their business when it arrives.</p>
+                <p>If your competitor is in the 5% and you are in the 95%, they are not slightly ahead. They are in a different race.</p>
+            </div>
+        </section>
 
-<p>Most importantly, they are handing the keys back to their own people.</p>
+        <!-- Plate II left | Text right -->
+        <section id="walk" class="mag-section">
+            <figure class="mag-media">
+                <img src="img/plate-2-two-conditions.jpg" alt="Plate II - On the Two Conditions of Data" loading="lazy">
+                <figcaption>Plate II - On the Two Conditions of Data</figcaption>
+            </figure>
+            <div class="mag-text">
+                <p>Most importantly, they are handing the keys back to their own people.</p>
+                <p>Artificial intelligence is not a software subscription you can rent from an external vendor; it is a structural capability you must cultivate from within. When you teach your underwriters, your clinicians, and your claims handlers the true shape of the data, the magic returns in-house.</p>
+            </div>
+        </section>
 
-<figure class="fig-inline right">
-    <img src="img/plate-2-two-conditions.jpg" alt="Plate II - On the Two Conditions of Data" loading="lazy">
-    <figcaption>Plate II - On the Two Conditions of Data</figcaption>
-</figure>
+        <!-- The 95%: text left | tabular-vs-graph right -->
+        <section id="goats" class="mag-section">
+            <div class="mag-text">
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">What the 95% Look Like</h2>
+                <p>A customer has motor, pet, and home policies with the same insurer. Her house is 200 metres from a flood plain. Her motor renewal is in six weeks. <strong>Five systems</strong> hold these facts. None of them know the others exist.</p>
+                <p>The renewal goes out at the standard rate. No bundle. No flood risk adjustment. The customer gets a better offer from a competitor and leaves. The insurer loses the household.</p>
+                <p>Multiply by a million customers and you have the 95%. The connections were thrown away before the AI ever saw the data. Not deliberately. They simply did not fit the shape. A spreadsheet has no column for "is married to" or "lives near a flood plain."</p>
+            </div>
+            <figure class="mag-media">
+                <img src="img/tabular-vs-graph.png" alt="Tabular versus graph - the shape of the data determines what AI can see" loading="lazy">
+                <figcaption>Same data. Different shape. Different answers.</figcaption>
+            </figure>
+        </section>
 
-<p>Artificial intelligence is not a software subscription you can rent from an external vendor; it is a structural capability you must cultivate from within. When you teach your underwriters, your clinicians, and your claims handlers the true shape of the data, the magic returns in-house. You no longer need to outsource your corporate memory. The AI becomes explainable, the Duty of Care becomes a natural byproduct of your architecture, and the multi-million-pound consulting dependency simply evaporates.</p>
+        <!-- Text left | Plate III right -->
+        <section id="overlay" class="mag-section">
+            <div class="mag-text">
+                <p>You no longer need to outsource your corporate memory. The AI becomes explainable, and treating people like people becomes a natural byproduct of your architecture. Consumer Duty - being fair. Customer Care - making people feel listened to. Duty of Care - the whole-person responsibility the NHS carries every day. These are not compliance checkboxes; they are what connected data does automatically when the relationships are intact. And the multi-million-pound consulting dependency simply evaporates.</p>
+                <p>The 95% will keep writing blank cheques to external vendors and wondering why their pilots continuously fail to reach production.</p>
+                <div class="split">
+                    <p class="win">The 5% will connect their data, empower their staff, and own their intelligence.</p>
+                    <p>The other 95% are still extracting it into rows, one cell at a time, and wondering why the model cannot tell them anything they did not already know.</p>
+                </div>
+            </div>
+            <figure class="mag-media">
+                <img src="img/plate-3-two-second-walk.jpg" alt="Plate III - The Two-Second Walk" loading="lazy">
+                <figcaption>Plate III - The Two-Second Walk</figcaption>
+            </figure>
+        </section>
 
-<figure class="fig-inline left">
-    <img src="img/plate-3-two-second-walk.jpg" alt="Plate III - The Two-Second Walk" loading="lazy">
-    <figcaption>Plate III - The Two-Second Walk</figcaption>
-</figure>
+        <!-- The Shepherd: overlay left | text right -->
+        <section id="shepherd" class="mag-section">
+            <figure class="mag-media">
+                <img src="img/semantic-overlay.png" alt="The semantic overlay - connections drawn in the dirt between existing systems" loading="lazy">
+                <figcaption>The map in the dirt. Nothing moves. Everything connects.</figcaption>
+            </figure>
+            <div class="mag-text">
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">The Shepherd in the Dirt</h2>
+                <p>The goats are still tethered to their separate posts. A semantic overlay does not move them. It draws a map in the dirt between them. Nothing breaks. Nothing migrates. But now the AI can see the relationships.</p>
+                <p>A pilot costs <strong>GBP 200,000 to 400,000</strong>. For context, KPMG was paid GBP 8.5 million just to promote adoption of the NHS Palantir platform that two-thirds of trusts declined to use. The GBP 330 million band-aid. Seven years. No IP transfer. No code stays behind.</p>
+                <p>You do not need a GBP 330 million contract. You need one team, one domain, one set of relationships drawn in the dirt. The virus does the rest.</p>
+            </div>
+        </section>
 
-<p>The 95% will keep writing blank cheques to external vendors and wondering why their pilots continuously fail to reach production.</p>
+        <!-- Plate IV left | Text right -->
+        <section class="mag-section">
+            <figure class="mag-media">
+                <img src="img/plate-4-overlay-bunker.jpg" alt="Plate IV - The Overlay Upon the Bunker" loading="lazy">
+                <figcaption>Plate IV - The Overlay Upon the Bunker</figcaption>
+            </figure>
+            <div class="mag-text">
+                <p>Learn and believe in your abilities. In Insurance and the NHS, the answer is not Palantir. The answer is you.</p>
+                <p class="closer">Follow the Five Percent.</p>
+            </div>
+        </section>
 
-<div class="split" style="clear:both;">
-<p class="win">The 5% will connect their data, empower their staff, and own their intelligence.</p>
-<p style="font-size: 1.05em; line-height: 1.75; color: var(--text); margin-top: 0.8em;">The 5% are not smarter. They are not better funded. They simply noticed, at some point, that the world is made of relationships, and built their systems to remember that. The other 95% are still extracting it into rows, one cell at a time, and wondering why the model cannot tell them anything they did not already know.</p>
-</div>
+        <!-- CTAs -->
+        <div class="cta-row">
+            <a href="paper.html" class="cta-btn primary">Read the Paper</a>
+            <a href="https://agilemesh.net" class="cta-btn secondary" rel="noopener">AgileMesh</a>
+        </div>
 
-<figure class="fig-inline right" style="margin-top:2em;">
-    <img src="img/plate-4-overlay-bunker.jpg" alt="Plate IV - The Overlay Upon the Bunker" loading="lazy">
-    <figcaption>Plate IV - The Overlay Upon the Bunker</figcaption>
-</figure>
-
-<p style="clear:left;">Learn and believe in your abilities. In Insurance and the NHS, the answer is not Palantir. The answer is you.</p>
-
-<p class="closer" style="clear:both;">Follow the Five Percent.</p>
-
-<div id="listen" style="margin: 2.5em 0; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--copper); border-radius: 8px; overflow: hidden;">
-<div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-    <iframe src="https://www.youtube.com/embed/FQQ8iH9nEY4" title="Space Helmets for Stubborn Data Goats" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-</div>
-<div style="padding: 20px 24px;">
-    <h3 style="font-family: var(--serif); font-size: 1.2em; font-weight: 400; color: var(--gold); margin-bottom: 6px;">Space Helmets for Stubborn Data Goats</h3>
-    <p style="font-size: 0.95em; line-height: 1.5; color: var(--dim); margin-bottom: 0;">A 16-minute audio companion. The goat metaphor, the GBP 330 million NHS contract, why your data warehouse is a paddock full of obstinate goats facing different directions - and what happens when you finally unclip them.</p>
-</div>
-</div>
-
-<div class="cta-row">
-    <a href="paper.html" class="cta-btn primary">Read the Paper</a>
-    <a href="explore.html" class="cta-btn secondary">Explore the Evidence</a>
-    <a href="https://agilemesh.net" class="cta-btn secondary" rel="noopener">AgileMesh</a>
-    <a href="https://theshapeofthought.com" class="cta-btn secondary" rel="noopener">The Shape of Thought</a>
-</div>
+    </main>
 
 </div>
 
@@ -307,6 +550,63 @@ footer {
     <p>Peter Cooper - CC BY 4.0 - 2026</p>
     <p style="margin-top:6px;">followthefivepercent.com - followthe5percent.com - followthe5.com</p>
 </footer>
+
+<script>
+var sections = document.querySelectorAll('.mag-section');
+var tocLinks = document.querySelectorAll('.toc a');
+var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            tocLinks.forEach(function(l) { l.classList.remove('active'); });
+            var link = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+            if (link) link.classList.add('active');
+        }
+    });
+}, { rootMargin: '-20% 0px -60% 0px' });
+sections.forEach(function(s) { observer.observe(s); });
+
+var ha = document.getElementById('heroAudio');
+var hBtn = document.getElementById('heroPlayBtn');
+var hFill = document.getElementById('heroFill');
+var hTime = document.getElementById('heroTime');
+var hDur = document.getElementById('heroDur');
+var hSpeeds = [1, 1.25, 1.5, 2];
+var hSi = 0;
+
+function heroToggle() {
+    if (ha.paused) {
+        ha.play();
+        hBtn.innerHTML = '&#10074;&#10074;';
+        hBtn.style.background = 'var(--copper)';
+        hBtn.style.color = '#fff';
+    } else {
+        ha.pause();
+        hBtn.innerHTML = '&#9654;';
+        hBtn.style.background = 'transparent';
+        hBtn.style.color = 'var(--copper)';
+    }
+}
+function hFmt(s) { var m = Math.floor(s/60); var sec = Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+ha.addEventListener('loadedmetadata', function() { hDur.textContent = hFmt(ha.duration); });
+ha.addEventListener('timeupdate', function() {
+    hFill.style.width = (ha.currentTime/ha.duration*100)+'%';
+    hTime.textContent = hFmt(ha.currentTime);
+});
+ha.addEventListener('ended', function() {
+    hBtn.innerHTML = '&#9654;';
+    hBtn.style.background = 'transparent';
+    hBtn.style.color = 'var(--copper)';
+});
+function heroSeek(e) {
+    var r = e.currentTarget.getBoundingClientRect();
+    ha.currentTime = ((e.clientX-r.left)/r.width)*ha.duration;
+}
+function heroSpeedCycle() {
+    hSi = (hSi+1)%hSpeeds.length;
+    ha.playbackRate = hSpeeds[hSi];
+    document.getElementById('heroSpeed').textContent = hSpeeds[hSi]+'x';
+}
+</script>
 
 </body>
 </html>

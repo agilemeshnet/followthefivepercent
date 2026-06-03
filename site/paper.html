@@ -10,14 +10,45 @@
 <meta property="og:type" content="article">
 <link rel="stylesheet" href="style.css">
 <style>
-.manifesto {
-    max-width: 720px;
+/* Paper layout: sticky ToC left, double-col body right */
+.paper-layout {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px 40px;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+.paper-sidebar {
+    position: sticky;
+    top: 70px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    padding-right: 8px;
+}
+.paper-sidebar::-webkit-scrollbar { width: 4px; }
+.paper-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.manifesto {
+    max-width: none;
+    margin: 0;
+    padding: 20px 0 40px;
+}
+.manifesto-body {
+    columns: 2;
+    column-gap: 36px;
+    column-rule: 1px solid var(--border);
+}
+.manifesto-body > * {
+    break-inside: avoid;
+}
+.manifesto-header {
+    column-span: all;
+    margin-bottom: 24px;
 }
 .manifesto h1 {
     font-family: var(--serif);
-    font-size: 2.4em;
+    font-size: 2.2em;
     color: var(--gold);
     font-weight: 400;
     margin-bottom: 6px;
@@ -26,35 +57,36 @@
 .manifesto .byline {
     font-size: 0.85em;
     color: var(--dim);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .manifesto p {
-    font-size: 1.05em;
-    line-height: 1.85;
-    margin-bottom: 1.2em;
+    font-size: 0.98em;
+    line-height: 1.82;
+    margin-bottom: 1.1em;
 }
 .manifesto h2 {
     font-family: var(--serif);
-    font-size: 1.6em;
+    font-size: 1.45em;
     font-weight: 400;
     color: var(--gold);
-    margin: 48px 0 20px;
-    padding-bottom: 8px;
+    margin: 36px 0 16px;
+    padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
+    column-span: all;
 }
 .manifesto h3 {
-    font-size: 1.15em;
+    font-size: 1.1em;
     font-weight: 600;
     color: var(--accent);
-    margin: 32px 0 12px;
+    margin: 28px 0 10px;
 }
 .manifesto ul, .manifesto ol {
-    margin: 0 0 1.2em 1.4em;
-    font-size: 1.05em;
-    line-height: 1.85;
+    margin: 0 0 1.1em 1.3em;
+    font-size: 0.98em;
+    line-height: 1.82;
 }
 .manifesto li {
-    margin-bottom: 0.4em;
+    margin-bottom: 0.35em;
 }
 .manifesto strong {
     font-weight: 600;
@@ -65,7 +97,8 @@
 .manifesto hr {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 48px 0;
+    margin: 36px 0;
+    column-span: all;
 }
 .manifesto .keywords {
     font-size: 0.9em;
@@ -73,36 +106,43 @@
     margin-top: 8px;
 }
 .references {
-    font-size: 0.88em;
-    line-height: 1.7;
+    font-size: 0.85em;
+    line-height: 1.65;
     color: var(--dim);
 }
 .references p {
-    font-size: 0.88em;
-    margin-bottom: 0.7em;
+    font-size: 0.85em;
+    margin-bottom: 0.6em;
     padding-left: 2em;
     text-indent: -2em;
 }
 .citation-info {
     background: var(--surface);
     border-left: 3px solid var(--copper);
-    padding: 20px 24px;
-    margin: 32px 0;
+    padding: 18px 22px;
+    margin: 28px 0;
     border-radius: 0 6px 6px 0;
-    font-size: 0.92em;
-    line-height: 1.7;
+    font-size: 0.88em;
+    line-height: 1.65;
     color: var(--dim);
 }
+/* Magazine-style figures: span both columns as section breaks */
 .plate {
-    margin: 2.5em 0;
+    margin: 2em 0;
     text-align: center;
+    break-inside: avoid;
+    column-span: all;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
 }
 .plate img {
     width: 100%;
-    max-width: 760px;
+    max-width: 680px;
     height: auto;
     border-radius: 4px;
-    box-shadow: 0 2px 16px rgba(26,23,20,0.08);
+    box-shadow: 0 2px 12px rgba(26,23,20,0.08);
 }
 .plate figcaption {
     font-size: 0.78em;
@@ -110,46 +150,136 @@
     font-family: var(--serif);
     font-style: italic;
     margin-top: 8px;
+    letter-spacing: 0.02em;
 }
 .plate-hero {
-    margin: 0 0 2em;
+    margin: 0 0 1.5em;
+    column-span: all;
+    text-align: center;
+    border: none;
+    background: transparent;
+    padding: 0;
 }
 .plate-hero img {
-    max-width: 520px;
+    max-width: 460px;
     box-shadow: 0 4px 24px rgba(26,23,20,0.12);
 }
-.toc {
-    background: var(--surface);
-    border: 1px solid var(--border);
+/* Space Goats widget at top of sidebar */
+.goat-widget {
+    margin-bottom: 20px;
     border-radius: 8px;
-    padding: 24px 28px;
-    margin: 32px 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: border-color 0.2s;
+}
+.goat-widget:hover {
+    border-color: var(--copper);
+}
+.goat-widget img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.goat-widget .goat-caption {
+    padding: 10px 12px;
+    font-size: 0.82em;
+    line-height: 1.4;
+    color: var(--dim);
+    text-align: center;
+}
+.goat-widget .goat-caption strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.95em;
+}
+/* Sidebar ToC */
+.toc {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
 }
 .toc h2 {
-    font-size: 1.1em;
+    font-size: 0.9em;
     margin: 0 0 12px;
-    padding-bottom: 0;
-    border-bottom: none;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
     color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: 600;
 }
 .toc ol {
     margin: 0;
-    padding-left: 1.2em;
-    font-size: 0.92em;
-    line-height: 2;
+    padding-left: 0;
+    font-size: 0.82em;
+    line-height: 1.7;
+    list-style: none;
+    counter-reset: toc-counter;
+}
+.toc > ol > li {
+    counter-increment: toc-counter;
+    margin-bottom: 4px;
+}
+.toc > ol > li > a::before {
+    content: counter(toc-counter) ". ";
+    color: var(--faint);
+    font-weight: 600;
 }
 .toc ol ol {
-    margin: 0;
-    padding-left: 1.4em;
-    font-size: 0.95em;
-    line-height: 1.8;
+    margin: 2px 0 4px 12px;
+    padding-left: 0;
+    font-size: 0.92em;
+    line-height: 1.6;
 }
 .toc a {
     color: var(--dim);
     text-decoration: none;
+    display: block;
+    padding: 2px 0;
+    transition: color 0.15s;
 }
 .toc a:hover {
     color: var(--accent);
+}
+/* Quote boxout in paper */
+.quote-boxout {
+    margin: 1.5em 0;
+    padding: 24px 28px;
+    background: var(--surface);
+    border-left: 5px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-family: var(--serif);
+    font-size: 1em;
+    line-height: 1.7;
+    color: var(--text);
+    break-inside: avoid;
+    column-span: all;
+    position: relative;
+}
+.quote-boxout::before {
+    content: "\201C";
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 2.5em;
+    color: var(--gold);
+    opacity: 0.25;
+    font-family: var(--serif);
+    line-height: 1;
+}
+.quote-boxout p {
+    font-size: 1em;
+    margin-bottom: 0.6em;
+}
+.quote-boxout p:last-child { margin-bottom: 0; }
+.quote-boxout .quote-cta {
+    font-weight: 600;
+    color: var(--gold);
+    font-size: 1.1em;
 }
 .podcast-callout {
     margin: 2em 0;
@@ -203,16 +333,49 @@
     .podcast-inner { flex-direction: column; text-align: center; }
     .podcast-icon { margin: 0 auto; }
 }
+/* Responsive: collapse to single column on tablets */
+@media (max-width: 960px) {
+    .paper-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 20px 16px;
+    }
+    .paper-sidebar {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+        margin-bottom: 24px;
+        padding: 20px;
+        background: var(--surface);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
+    .toc ol { columns: 2; column-gap: 20px; }
+    .manifesto-body {
+        columns: 1;
+    }
+    .manifesto h2 {
+        column-span: none;
+    }
+    .plate-hero { column-span: none; }
+    .quote-boxout { column-span: none; }
+    .manifesto hr { column-span: none; }
+}
+@media (max-width: 600px) {
+    .toc ol { columns: 1; }
+}
 footer {
     text-align: center;
     padding: 30px 20px;
     border-top: 1px solid var(--border);
     color: var(--faint);
     font-size: 0.82em;
-    max-width: 720px;
+    max-width: 1200px;
     margin: 40px auto 0;
 }
 </style>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2ccbe9fb74114276a5ba1b3fcaa4b2f1"}'></script>
 </head>
 <body>
 
@@ -220,85 +383,116 @@ footer {
     <div class="container">
         <a href="index.html" class="site-title">Follow the Five Percent</a>
         <ul class="nav-links">
-            <li><a href="index.html">Manifesto</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="paper.html" class="active">Paper</a></li>
-            <li><a href="#listen">Listen</a></li>
-            <li><a href="mandarin.html">中文</a></li>
-            <li><a href="explore.html">Explore</a></li>
             <li><a href="https://agilemesh.net" rel="noopener">AgileMesh</a></li>
         </ul>
     </div>
 </nav>
 
-<div class="manifesto">
+<div class="paper-layout">
 
-<figure class="plate plate-hero">
-    <img src="img/plate-0-cover.jpg" alt="Follow the Five Percent - architectural sciagraphy" loading="eager">
-</figure>
-
-<h1>Follow the Five Percent: What Graph-Literate Enterprises Did Differently and Why It Matters</h1>
-<p class="byline">Peter Cooper - AgileMesh / The Shape of Thought Project - May 2026</p>
-
-<hr>
-
-<h2>Abstract</h2>
-
-<div class="abstract">
-<p>Follow the Five Percent. That is the prescription.</p>
-
-<p>Ninety-five percent of enterprise AI pilots fail. The 5% who succeed are public companies, filing audited results, documenting their architectures, growing 30% year on year. This paper examines what that 5% actually did. The answer is the same in every case: they kept the connections in their data alive. Lemonade processes claims in 2 seconds across 18 fraud-detection algorithms because the chain from customer to policy to claim to fraud signal to payment is one connected walk. Root Insurance prices motor policies from live telematics feeds and grew to $1.52 billion in revenue because the driver is connected to the driving. Allianz automates food-spoilage claims during storm events in under 5 minutes. AXA Switzerland achieves greater than 99% accuracy in automated claims triage. None of them necessarily runs a 'knowledge graph.' All of them treat relationships between entities as first-class objects that AI can traverse and reason over. McKinsey's analysis shows AI-leading insurers generating 6.1 times the total shareholder return of laggards over five years. The AI in insurance market is projected to reach $175-303 billion by 2035 depending on analyst methodology. The pattern extends beyond insurance: the 2008 financial crisis, healthcare adverse events, intelligence failures, and COVID-19 transmission models all exhibited the same structural blindness - data that had been disconnected from its relational context. Fix the shape and the AI starts working. Keep the shape and no amount of spending will change the outcome. The blueprint is public. The results are audited. Follow the Five Percent.</p>
-
-<p class="keywords"><strong>Keywords:</strong> knowledge graphs, enterprise AI success, insurance technology, graph literacy, connected data, data architecture, relational reasoning</p>
-</div>
-
-<div id="listen" class="podcast-callout">
-<div class="podcast-inner">
-    <div class="podcast-icon">&#9654;</div>
-    <div class="podcast-text">
-        <h3>Prefer to listen?</h3>
-        <p>Space Helmets for Stubborn Data Goats - a 16-minute audio companion that takes the goat metaphor and runs with it. All the way to the paddock. And possibly up a stepladder into deep space.</p>
-        <a href="https://youtu.be/FQQ8iH9nEY4" class="podcast-link" rel="noopener" target="_blank">Release the goats &rarr;</a>
+<!-- LEFT SIDEBAR: Sticky ToC -->
+<aside class="paper-sidebar">
+<div class="goat-widget" style="text-decoration:none;">
+    <div style="padding:14px 14px 0;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div style="width:40px;height:40px;border-radius:6px;background:var(--raised);border:1px solid var(--border-h);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">&#128016;</div>
+            <div>
+                <div style="font-family:var(--serif);font-size:0.82em;color:var(--gold);line-height:1.3;">Space Goats</div>
+                <div style="font-size:0.7em;color:var(--faint);">16 min - May 2026</div>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <button id="sidePlayBtn" onclick="sideToggle()" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--copper);background:transparent;color:var(--copper);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;">&#9654;</button>
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px;">
+                <div id="sideProgress" onclick="sideSeek(event)" style="width:100%;height:4px;background:var(--border);border-radius:2px;cursor:pointer;overflow:hidden;">
+                    <div id="sideFill" style="height:100%;background:linear-gradient(90deg,var(--copper),var(--gold));border-radius:2px;width:0%;transition:width 0.3s;"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--faint);font-family:var(--mono);">
+                    <span id="sideTime">0:00</span>
+                    <span id="sideDur">16:31</span>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="goat-caption">
+        <a href="goats.html" style="font-size:0.9em;">The Funny Goat Bits &rarr;</a>
+    </div>
+    <audio id="sideAudio" preload="metadata">
+        <source src="img/space-goats-podcast.mp3" type="audio/mpeg">
+    </audio>
 </div>
-</div>
-
 <div class="toc">
 <h2>Contents</h2>
 <ol>
 <li><a href="#s1">Follow the Five Percent</a></li>
 <li><a href="#s2">What the Winners Actually Did</a>
     <ol>
-    <li><a href="#s2-1">Lemonade: The Two-Second Claim</a></li>
-    <li><a href="#s2-2">Root Insurance: The Living Price</a></li>
-    <li><a href="#s2-3">Allianz Australia: Storm Claims in Five Minutes</a></li>
-    <li><a href="#s2-4">Shift Technology at AXA Switzerland</a></li>
+    <li><a href="#s2-1">Lemonade</a></li>
+    <li><a href="#s2-2">Root Insurance</a></li>
+    <li><a href="#s2-3">Allianz Australia</a></li>
+    <li><a href="#s2-4">Shift / AXA</a></li>
     </ol>
 </li>
 <li><a href="#s3">The Pattern</a></li>
-<li><a href="#s4">Why Most Organisations Cannot See This</a>
+<li><a href="#s4">Why Most Cannot See This</a>
     <ol>
-    <li><a href="#s4-1">The Data Shape They Were Given</a></li>
-    <li><a href="#s4-2">The Graph Shape the Winners Use</a></li>
-    <li><a href="#s4-3">Why IT Departments Reproduce the Problem</a></li>
-    <li><a href="#s4-4">The Evidence from the Data</a></li>
+    <li><a href="#s4-1">The Data Shape</a></li>
+    <li><a href="#s4-2">The Graph Shape</a></li>
+    <li><a href="#s4-3">IT Departments</a></li>
+    <li><a href="#s4-4">The Evidence</a></li>
     </ol>
 </li>
-<li><a href="#s5">What the 95% Actually Look Like</a></li>
-<li><a href="#s6">The Pattern Repeats Beyond Insurance</a></li>
+<li><a href="#s5">What the 95% Look Like</a></li>
+<li><a href="#s6">Beyond Insurance</a></li>
 <li><a href="#s7">The Money on the Table</a></li>
 <li><a href="#s8">Who Actually Pays</a>
     <ol>
-    <li><a href="#s8-1">The Scandal of Renting Intelligence</a></li>
+    <li><a href="#s8-1">Renting Intelligence</a></li>
     </ol>
 </li>
-<li><a href="#s9">How to Start: The Semantic Overlay</a>
+<li><a href="#s9">The Semantic Overlay</a>
     <ol>
-    <li><a href="#s9-0">What It Actually Costs</a></li>
+    <li><a href="#s9-0">What It Costs</a></li>
     <li><a href="#s9-1">Five Who Chose the Virus</a></li>
     </ol>
 </li>
-<li><a href="#s10">The Five Percent Manifesto</a></li>
+<li><a href="#s10">The Manifesto</a></li>
+<li><a href="#refs">References</a></li>
 </ol>
+</div>
+
+</aside>
+
+<!-- RIGHT: Paper body in double columns -->
+<div class="manifesto">
+
+<div class="manifesto-header">
+<figure class="plate plate-hero">
+    <img src="img/cover-landscape.jpg" alt="Follow the Five Percent - architectural sciagraphy" loading="eager">
+</figure>
+
+<h1>Follow the Five Percent: What Graph-Literate Enterprises Did Differently and Why It Matters</h1>
+<p class="byline">Peter Cooper - AgileMesh / The Shape of Thought Project - May 2026</p>
+</div>
+
+<div class="manifesto-body">
+
+<div class="quote-boxout">
+<p>The 5% will connect their data, empower their staff, and own their intelligence.</p>
+<p>The 5% are not smarter. They are not better funded. They simply noticed, at some point, that the world is made of relationships, and built their systems to remember that. The other 95% are still extracting it into rows, one cell at a time, and wondering why the model cannot tell them anything they did not already know.</p>
+<p class="quote-cta">Follow the Five Percent.</p>
+</div>
+
+<h2>Abstract</h2>
+
+<div class="abstract" style="column-span:all; break-inside:avoid;">
+<p>Follow the Five Percent. That is the prescription.</p>
+
+<p>Ninety-five percent of enterprise AI pilots fail. The 5% who succeed are public companies, filing audited results, documenting their architectures, growing 30% year on year. This paper examines what that 5% actually did. The answer is the same in every case: they kept the connections in their data alive. Lemonade processes claims in 2 seconds across 18 fraud-detection algorithms because the chain from customer to policy to claim to fraud signal to payment is one connected walk. Root Insurance prices motor policies from live telematics feeds and grew to $1.52 billion in revenue because the driver is connected to the driving. Allianz automates food-spoilage claims during storm events in under 5 minutes. AXA Switzerland achieves greater than 99% accuracy in automated claims triage. None of them necessarily runs a 'knowledge graph.' All of them treat relationships between entities as first-class objects that AI can traverse and reason over. McKinsey's analysis shows AI-leading insurers generating 6.1 times the total shareholder return of laggards over five years. The AI in insurance market is projected to reach $175-303 billion by 2035 depending on analyst methodology. The pattern extends beyond insurance: the 2008 financial crisis, healthcare adverse events, intelligence failures, and COVID-19 transmission models all exhibited the same structural blindness - data that had been disconnected from its relational context. Fix the shape and the AI starts working. Keep the shape and no amount of spending will change the outcome. The blueprint is public. The results are audited. Follow the Five Percent.</p>
+
+<p class="keywords"><strong>Keywords:</strong> knowledge graphs, enterprise AI success, insurance technology, graph literacy, connected data, data architecture, relational reasoning</p>
 </div>
 
 <hr>
@@ -615,7 +809,7 @@ footer {
 
 <p>Most importantly, they are handing the keys back to their own people.</p>
 
-<p>Artificial intelligence is not a software subscription you can rent from an external vendor; it is a structural capability you must cultivate from within. When you teach your underwriters, your clinicians, and your claims handlers the true shape of the data, the magic returns in-house. You no longer need to outsource your corporate memory. The AI becomes explainable, the Duty of Care becomes a natural byproduct of your architecture, and the multi-million-pound consulting dependency simply evaporates.</p>
+<p>Artificial intelligence is not a software subscription you can rent from an external vendor; it is a structural capability you must cultivate from within. When you teach your underwriters, your clinicians, and your claims handlers the true shape of the data, the magic returns in-house. You no longer need to outsource your corporate memory. The AI becomes explainable, and treating people like people becomes a natural byproduct of your architecture. Consumer Duty - being fair. Customer Care - making people feel listened to. Duty of Care - the whole-person responsibility the NHS carries every day. These are not compliance checkboxes; they are what connected data does automatically when the relationships are intact. And the multi-million-pound consulting dependency simply evaporates.</p>
 
 <p>The 95% will keep writing blank cheques to external vendors and wondering why their pilots continuously fail to reach production.</p>
 
@@ -733,11 +927,48 @@ footer {
 <p>Cooper, P. (2026). <em>The Tabular Prison: The Financial Cost of Graph-Blindness in Enterprise Intelligence</em>. Zenodo. DOI: 10.5281/zenodo.20326278. Same evidence, different projection - diagnosis where this paper leads with winners.</p>
 </div>
 
-</div>
+</div><!-- /manifesto-body -->
+</div><!-- /manifesto -->
+</div><!-- /paper-layout -->
 
 <footer>
     <p>Peter Cooper - CC BY 4.0 - 2026</p>
 </footer>
 
+<script>
+var sa = document.getElementById('sideAudio');
+var sBtn = document.getElementById('sidePlayBtn');
+var sFill = document.getElementById('sideFill');
+var sTime = document.getElementById('sideTime');
+var sDur = document.getElementById('sideDur');
+function sideToggle() {
+    if (sa.paused) {
+        sa.play();
+        sBtn.innerHTML = '&#10074;&#10074;';
+        sBtn.style.background = 'var(--copper)';
+        sBtn.style.color = '#fff';
+    } else {
+        sa.pause();
+        sBtn.innerHTML = '&#9654;';
+        sBtn.style.background = 'transparent';
+        sBtn.style.color = 'var(--copper)';
+    }
+}
+function sFmt(s) { var m = Math.floor(s/60); var sec = Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+sa.addEventListener('loadedmetadata', function() { sDur.textContent = sFmt(sa.duration); });
+sa.addEventListener('timeupdate', function() {
+    sFill.style.width = (sa.currentTime/sa.duration*100)+'%';
+    sTime.textContent = sFmt(sa.currentTime);
+});
+sa.addEventListener('ended', function() {
+    sBtn.innerHTML = '&#9654;';
+    sBtn.style.background = 'transparent';
+    sBtn.style.color = 'var(--copper)';
+});
+function sideSeek(e) {
+    var r = e.currentTarget.getBoundingClientRect();
+    sa.currentTime = ((e.clientX-r.left)/r.width)*sa.duration;
+}
+</script>
 </body>
 </html>
