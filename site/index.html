@@ -6,7 +6,7 @@
 <title>Follow the Five Percent</title>
 <meta name="description" content="95% of enterprise AI pilots fail. The 5% who succeed are public companies with auditable results. This is what they did differently.">
 <meta property="og:title" content="Follow the Five Percent">
-<meta property="og:description" content="The era of the 330 million band-aid is over. They kept the connections in their data alive.">
+<meta property="og:description" content="The era of the 330 million band-aid is ending. They kept the connections in their data alive.">
 <meta property="og:type" content="article">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -127,6 +127,8 @@ nav .nav-links a.highlight:hover {
 
 .mag-media img {
     width: 100%;
+    max-height: 420px;
+    object-fit: cover;
     border-radius: 6px;
     box-shadow: 0 2px 16px rgba(26,23,20,0.08);
     display: block;
@@ -351,8 +353,9 @@ footer {
         <a href="index.html" class="site-title">Follow the Five Percent</a>
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="#nhs">NHS</a></li>
+            <li><a href="#winners">Insurance</a></li>
             <li><a href="paper.html" class="highlight">Paper</a></li>
-            <li><a href="https://agilemesh.net" rel="noopener">AgileMesh</a></li>
         </ul>
     </div>
 </nav>
@@ -363,13 +366,16 @@ footer {
         <div class="toc-title">The Five Percent</div>
         <a href="#listen" class="active">Space Goats</a>
         <a href="#visible">The Band-Aid</a>
+        <a href="#nhs">Five Pathways</a>
+        <a href="#prevention">Prevention</a>
         <a href="#winners">Two Seconds</a>
         <a href="#conditions">The Code</a>
         <a href="#money">Six Times</a>
         <a href="#walk">Own People</a>
         <a href="#goats">The 95%</a>
         <a href="#overlay">The Duty</a>
-        <a href="#shepherd">The Shepherd</a>
+        <a href="#sovereign">Sovereign</a>
+        <a href="#start">Where to Start</a>
     </nav>
 
     <main class="mag-main">
@@ -424,8 +430,43 @@ footer {
                 <img src="img/cover-landscape.jpg" alt="Follow the Five Percent - What Graph-Literate Enterprises Did Differently" loading="eager">
             </figure>
             <div class="mag-text">
-                <p class="opener">The era of the GBP 330 million band-aid is over.</p>
+                <p class="opener">The era of the GBP 330 million band-aid is ending.</p>
                 <p>For decades, the Great SQL Monoculture has kept our enterprise data tied up like obstinate goats in a paddock, facing different directions and resolutely refusing to mingle. And for decades, the insurance industry and the NHS have paid a staggering premium to external consultants just to tell us what those isolated goats are thinking.</p>
+            </div>
+        </section>
+
+        <!-- NHS: Five Pathways -->
+        <section id="nhs" class="mag-section">
+            <div class="mag-text">
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">Five Pathways. One Problem.</h2>
+                <p>Across the NHS, clinicians make life-and-death decisions without seeing the full picture. The data exists. It just does not move.</p>
+                <p><strong>Stroke thrombolysis.</strong> 100,000 strokes a year. The stroke team has 4.5 hours. Thrombolysis hinges on one question: is this patient on anticoagulants? The answer is held by the GP. The stroke team cannot access it. 1.9 million neurons die per minute of delay.</p>
+                <p><strong>Post-discharge suicide.</strong> The first week after psychiatric discharge is the highest-risk period. But the discharge event does not push a notification to the community team. The 72-hour clock ticks and nobody has started it.</p>
+                <p><strong>Section 136 crisis care.</strong> A person is detained under the Mental Health Act. The receiving clinician cannot see their GP medications, their liver disease, their depot injection schedule. Five systems. Zero push.</p>
+            </div>
+            <div class="mag-text">
+                <p><strong>Ambulance crews flying blind.</strong> Police are withdrawing from mental health calls. The ambulance crew arrives with no crisis plan, no risk assessment, no medication list. 200 to 250 additional incidents per day.</p>
+                <p><strong>Community nursing handover.</strong> A district nurse visits a discharged patient. The discharge summary has not arrived. The GP has not been notified. The nurse phones the hospital, gets put on hold, makes a clinical judgement.</p>
+                <div class="split">
+                    <p class="win">Same structural problem as the insurance 95%. The connections were thrown away before anyone could use them.</p>
+                    <p>In January 2026, a coroner directed NHS England to explain why hospital doctors cannot access GP records. The data exists in every case. It just does not move.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prevention -->
+        <section id="prevention" class="mag-section">
+            <div>
+                <div class="quote-boxout">
+                    <p>Prevention is better than cure.</p>
+                    <p>A connected graph does not speed up the reaction. It removes the need for one. The graph that knows a patient's history can see what is coming before the crisis arrives.</p>
+                    <p class="quote-cta">See the past. See the future.</p>
+                </div>
+            </div>
+            <div class="mag-text">
+                <p>The NHS 10-Year Health Plan calls for three shifts: hospital to community, analogue to digital, <strong>treatment to prevention</strong>. A connected information layer is the infrastructure for the third shift.</p>
+                <p>The data already exists - in GP Connect, FHIR, RiO, SystmOne, EMIS. The standards already exist - FHIR UK Core, openEHR, GP Connect APIs. What is missing is someone who thinks in connected structures showing NHS teams how to see their data as a joined-up picture instead of isolated tables.</p>
+                <p>This is not a mental health problem. It is an architecture problem. And it is the same architecture problem whether the clock is measured in 72 hours for a discharged patient, 4.5 hours for a stroke, or two seconds for an insurance claim.</p>
             </div>
         </section>
 
@@ -433,8 +474,8 @@ footer {
         <section id="winners" class="mag-section">
             <div class="mag-text">
                 <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">The Two-Second Claim</h2>
-                <p>A customer files a claim. Lemonade's AI reads it, checks the policy, runs 18 fraud algorithms, and sends the money. That takes <strong>two seconds</strong>. The same claim at a typical UK insurer takes 25 to 30 days.</p>
-                <p>Root Insurance connects drivers to their driving through live telematics. Revenue: <strong>$1.52 billion</strong>, up 29% in a year. Allianz Australia processes storm claims in <strong>under 5 minutes</strong>. AXA Switzerland hits greater than <strong>99% accuracy</strong> in automated claims triage.</p>
+                <p>A customer files a claim. In one documented case, Lemonade's AI read it, checked the policy, ran 18 fraud algorithms, and sent the money in <strong>two seconds</strong>. The same claim at a typical UK insurer takes 25 to 30 days.</p>
+                <p>Root Insurance connects drivers to their driving through live telematics. Revenue: <strong>$1.52 billion</strong>, up 29% in a year. Allianz Australia processes simple storm claims in <strong>under 5 minutes</strong>. AXA Switzerland reports greater than <strong>99% accuracy</strong> in automated claims triage on routine cases.</p>
                 <p>Four companies. Four different tech stacks. One thing in common: they kept the connections in their data alive.</p>
             </div>
             <figure class="mag-media">
@@ -443,29 +484,29 @@ footer {
             </figure>
         </section>
 
-        <!-- Text left | Plate I right -->
+        <!-- Plate I left | Text right -->
         <section id="conditions" class="mag-section">
-            <div class="mag-text">
-                <p>But the 5% of companies that are actually succeeding with AI - the Lemonades, the Roots, the forward-thinking institutions - have cracked the code. They are not buying better algorithms or more expensive black boxes. They are building better environments. They are tearing down the fences, unclipping the carabiners, and letting their data connect in rich, semantic graphs.</p>
-            </div>
             <figure class="mag-media">
                 <img src="img/plate-1-visible-submerged.jpg" alt="Plate I - The Visible and the Submerged" loading="lazy">
                 <figcaption>Plate I - The Visible and the Submerged</figcaption>
             </figure>
+            <div class="mag-text">
+                <p>But the 5% of companies that are actually succeeding with AI - the Lemonades, the Roots, the forward-thinking institutions - have cracked the code. They are not buying better algorithms or more expensive black boxes. They are building better environments. They are tearing down the fences, unclipping the carabiners, and letting their data connect in rich, semantic graphs.</p>
+            </div>
         </section>
 
-        <!-- The Money: iceberg left | text right -->
+        <!-- The Money: text left | iceberg right -->
         <section id="money" class="mag-section">
-            <figure class="mag-media">
-                <img src="img/iceberg-5-vs-95.png" alt="The 5% iceberg - visible success, submerged failure" loading="lazy">
-                <figcaption>5% visible. 95% submerged.</figcaption>
-            </figure>
             <div class="mag-text">
                 <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">Six Times</h2>
                 <p>McKinsey found that AI-leading insurers created <strong>6.1 times the total shareholder return</strong> of laggards over five years. Not 6.1 percent. Six times.</p>
                 <p>The AI in insurance market is projected to reach <strong>$175 to $303 billion by 2035</strong>. Deloitte projects $160 billion in savings from fraud analytics alone. That money will go somewhere. The only question is whose AI can reason about their business when it arrives.</p>
-                <p>If your competitor is in the 5% and you are in the 95%, they are not slightly ahead. They are in a different race.</p>
+                <p>Most organisations sit somewhere in between - running pilots, connecting some data, still fighting legacy SQL in other corners. The gradient is real. But the direction matters more than the position. If your competitor is pulling toward the 5% and you are standing still, they are not slightly ahead. They are in a different race.</p>
             </div>
+            <figure class="mag-media">
+                <img src="img/iceberg-5-vs-95.png" alt="The 5% iceberg - visible success, submerged failure" loading="lazy">
+                <figcaption>5% visible. 95% submerged.</figcaption>
+            </figure>
         </section>
 
         <!-- Plate II left | Text right -->
@@ -494,8 +535,12 @@ footer {
             </figure>
         </section>
 
-        <!-- Text left | Plate III right -->
+        <!-- Plate III left | Text right -->
         <section id="overlay" class="mag-section">
+            <figure class="mag-media">
+                <img src="img/plate-3-two-second-walk.jpg" alt="Plate III - The Two-Second Walk" loading="lazy">
+                <figcaption>Plate III - The Two-Second Walk</figcaption>
+            </figure>
             <div class="mag-text">
                 <p>You no longer need to outsource your corporate memory. The AI becomes explainable, and treating people like people becomes a natural byproduct of your architecture. Consumer Duty - being fair. Customer Care - making people feel listened to. Duty of Care - the whole-person responsibility the NHS carries every day. These are not compliance checkboxes; they are what connected data does automatically when the relationships are intact. And the multi-million-pound consulting dependency simply evaporates.</p>
                 <p>The 95% will keep writing blank cheques to external vendors and wondering why their pilots continuously fail to reach production.</p>
@@ -504,42 +549,63 @@ footer {
                     <p>The other 95% are still extracting it into rows, one cell at a time, and wondering why the model cannot tell them anything they did not already know.</p>
                 </div>
             </div>
-            <figure class="mag-media">
-                <img src="img/plate-3-two-second-walk.jpg" alt="Plate III - The Two-Second Walk" loading="lazy">
-                <figcaption>Plate III - The Two-Second Walk</figcaption>
-            </figure>
         </section>
 
-        <!-- The Shepherd: overlay left | text right -->
-        <section id="shepherd" class="mag-section">
+        <!-- Sovereign Capability -->
+        <section id="sovereign" class="mag-section">
+            <div class="mag-text">
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">Sovereign Capability</h2>
+                <p>The goats are still tethered to their separate posts. A semantic overlay does not move them. It draws a map in the dirt between them. Nothing breaks. Nothing migrates. But now the AI can see the relationships.</p>
+                <p>On 3 June 2026, Parliament recommended the government exercise the break clause on the GBP 330 million NHS Palantir contract. The committee branded it "an unacceptable point of weakness." The government announced a contract review on 15 June.</p>
+                <p>The NHS does not need another platform it rents from a foreign defence contractor. It needs sovereign capability - the ability to connect its own data, with its own people, using open standards it already has. FHIR. GP Connect. OpenEHR. OpenSAFELY-style federation where code goes to data, not data to code.</p>
+                <p>We offer training, not a platform. There is nothing to buy. No vendor dependency. No lock-in. The NHS owns everything built.</p>
+            </div>
             <figure class="mag-media">
                 <img src="img/semantic-overlay.png" alt="The semantic overlay - connections drawn in the dirt between existing systems" loading="lazy">
                 <figcaption>The map in the dirt. Nothing moves. Everything connects.</figcaption>
             </figure>
-            <div class="mag-text">
-                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">The Shepherd in the Dirt</h2>
-                <p>The goats are still tethered to their separate posts. A semantic overlay does not move them. It draws a map in the dirt between them. Nothing breaks. Nothing migrates. But now the AI can see the relationships.</p>
-                <p>A pilot costs <strong>GBP 200,000 to 400,000</strong>. For context, KPMG was paid GBP 8.5 million just to promote adoption of the NHS Palantir platform that two-thirds of trusts declined to use. The GBP 330 million band-aid. Seven years. No IP transfer. No code stays behind.</p>
-                <p>You do not need a GBP 330 million contract. You need one team, one domain, one set of relationships drawn in the dirt. The virus does the rest.</p>
-            </div>
         </section>
 
-        <!-- Plate IV left | Text right -->
-        <section class="mag-section">
+        <!-- Where to Start: Plate IV left | text right -->
+        <section id="start" class="mag-section">
             <figure class="mag-media">
                 <img src="img/plate-4-overlay-bunker.jpg" alt="Plate IV - The Overlay Upon the Bunker" loading="lazy">
                 <figcaption>Plate IV - The Overlay Upon the Bunker</figcaption>
             </figure>
             <div class="mag-text">
-                <p>Learn and believe in your abilities. In Insurance and the NHS, the answer is not Palantir. The answer is you.</p>
-                <p class="closer">Follow the Five Percent.</p>
+                <h2 style="font-family:var(--serif);font-size:1.5em;color:var(--gold);font-weight:400;margin:0 0 16px;">Where to Start</h2>
+                <p>A minimal semantic layer is not a multi-year transformation programme. It is a team of two or three people, one business domain, and twelve weeks.</p>
+                <p><strong>Pick one domain</strong> - claims, renewals, referrals - where the pain of disconnection is already costing you money. Map the entities and their relationships. Not all of them. Just the ones your people already navigate in their heads every day.</p>
+                <p><strong>Build the overlay</strong> - a graph that sits alongside your existing systems. Nothing migrates. Nothing breaks. The graph reads from the sources you already have and draws the connections between them.</p>
+                <p><strong>Let your people use it</strong> - the underwriter who currently checks four screens can now ask one question and get a connected answer. The claims handler sees the customer's whole world, not one policy at a time.</p>
+                <p>A pilot costs <strong>GBP 200,000 to 400,000</strong>. Governance is lighter than you think - the graph is explainable by design. Every answer traces back through visible relationships to source records. No black box.</p>
+            </div>
+        </section>
+
+        <!-- Final: text left | quote right -->
+        <section class="mag-section">
+            <div class="mag-text">
+                <p>This piece is part of a broader body of work on how connected data structures change what AI can do - in insurance and the NHS. The underlying research is published and open.</p>
+                <p style="margin-top:12px;">
+                    <a href="paper.html" style="color:var(--accent);">Read the Paper</a> - the research behind the practice.<br>
+                    <a href="mailto:peter@followthe5.com" style="color:var(--accent);">peter@followthe5.com</a> - to discuss, challenge, or explore.
+                </p>
+            </div>
+            <div>
+                <div class="quote-boxout" style="border-left-color:var(--copper);">
+                    <p>Learn and believe in your abilities.</p>
+                    <p>In Insurance and the NHS, the answer is not Palantir. The answer is you.</p>
+                    <p class="quote-cta">Follow the Five Percent.</p>
+                </div>
             </div>
         </section>
 
         <!-- CTAs -->
         <div class="cta-row">
             <a href="paper.html" class="cta-btn primary">Read the Paper</a>
-            <a href="https://agilemesh.net" class="cta-btn secondary" rel="noopener">AgileMesh</a>
+            <a href="#nhs" class="cta-btn secondary">NHS Pathways</a>
+            <a href="#winners" class="cta-btn secondary">Insurance Cases</a>
+            <a href="mailto:peter@followthe5.com" class="cta-btn secondary">Get in Touch</a>
         </div>
 
     </main>
@@ -548,7 +614,8 @@ footer {
 
 <footer>
     <p>Peter Cooper - CC BY 4.0 - 2026</p>
-    <p style="margin-top:6px;">followthefivepercent.com - followthe5percent.com - followthe5.com</p>
+    <p style="margin-top:6px;">followthe5.com &middot; <a href="mailto:peter@followthe5.com" style="color:var(--dim);">peter@followthe5.com</a> &middot; 07892 839 712</p>
+    <p style="margin-top:6px;color:var(--faint);font-size:0.75em;">Insurance and NHS. The answer is not Palantir. The answer is you.</p>
 </footer>
 
 <script>
