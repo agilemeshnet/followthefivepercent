@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BS Draft</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; max-width: 660px; margin: 0 auto; padding: 30px; color: #1a1a1a; line-height: 1.6; }
+  h2 { font-size: 13px; color: #003087; margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #003087; padding-bottom: 4px; }
+  p, li { font-size: 13px; margin-bottom: 8px; }
+  ul { padding-left: 18px; }
+  .copybox { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 16px 20px; margin: 10px 0 24px; position: relative; cursor: pointer; }
+  .copybox:hover { background: #f0f4f8; border-color: #003087; }
+  .copybox::after { content: "click to copy"; position: absolute; top: 8px; right: 12px; font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
+  .copybox.copied::after { content: "copied"; color: #2e7d32; }
+  .copybox p { margin-bottom: 6px; }
+  .copybox p:last-child { margin-bottom: 0; }
+  .hint { font-size: 11px; color: #888; font-style: italic; margin: 4px 0 8px; }
+</style>
+</head>
+<body>
+
+<p style="font-size:11px;color:#999;margin-bottom:20px;">Hidden page. Not indexed. Copy each field into the form.</p>
+
+<h2>Bright Spark Title</h2>
+<div class="copybox" onclick="copyThis(this)">
+<p>Follow the Five - Building Our Own AI and Data Intelligence</p>
+</div>
+
+<h2>Business Area</h2>
+<div class="copybox" onclick="copyThis(this)">
+<p>Data / Technology</p>
+</div>
+
+<h2>Categories</h2>
+<div class="copybox" onclick="copyThis(this)">
+<p>AI, Data, Process Improvement, Competitive Advantage</p>
+</div>
+
+<h2>Bright Spark Description</h2>
+<div class="copybox" onclick="copyThis(this)">
+<p>We are buying AI tools. We should be building AI thinking.</p>
+
+<p>The insurance industry is spending heavily on AI platforms, large language models, and vendor solutions. Most of this spend treats AI as a product to purchase rather than a capability to develop. The result: we become dependent on external providers for our own data intelligence, and our people become consumers of AI outputs rather than architects of AI thinking.</p>
+
+<p>"Follow the Five" is a programme to develop internal AI and data capability by teaching our people to look at the same data through five different lenses:</p>
+
+<p>- Tables: what we already know (spreadsheets, SQL, reports)
+- Graphs: who connects to whom and why (fraud rings, broker networks, claims chains)
+- Timelines: what happened in what order (claims journeys, policy lifecycles, lag patterns)
+- Spatial: where things cluster and why (postcodes, risk zones, weather corridors)
+- Narrative: what the data means when you tell the story (underwriting rationale, claims summaries, board reporting)</p>
+
+<p>Most organisations, including ours, default to tables for everything. A claim is a row. A broker is a row. A fraud pattern is a row. But fraud is a graph. A claims journey is a timeline. A risk cluster is spatial. When you trap data in the wrong shape, you cannot see what it is telling you.</p>
+
+<p>This is not about buying another platform. It is about developing the 5% of our people who can think in multiple data shapes, and letting them lead the rest. The AI models change every six months. The ability to look at our own data and see what others miss - that compounds.</p>
+</div>
+
+<h2>Benefits and Improvements</h2>
+<div class="copybox" onclick="copyThis(this)">
+<p>1. Fraud detection improvement. Fraud is relational - rings, repeat addresses, connected claimants. Graph views catch what table queries miss. Industry benchmarks show 30-50% improvement in fraud detection when moving from tabular analysis to graph-based pattern matching.</p>
+
+<p>2. Reduced vendor dependency. Every AI vendor we bring in owns a piece of our data intelligence. Building internal capability means our competitive advantage stays inside the building. Google DeepMind published last week that federated, specialised intelligence outperforms monolithic solutions - the same applies to us. We should not rent our thinking.</p>
+
+<p>3. Better underwriting decisions. An underwriter looking at a risk in a table sees a number. The same underwriter looking at spatial clustering, claims timeline patterns, and broker relationship graphs sees context. Context is the difference between pricing a risk and understanding it.</p>
+
+<p>4. People development. The 5% who learn to think across data shapes become force multipliers. They train others. They spot opportunities the tools miss. They stay, because they are growing. This is a retention play as much as a capability play.</p>
+
+<p>5. Speed to insight. When your people know which lens to use for which question, they stop asking IT to build another report. They ask the right question in the right shape. Faster cycle from question to decision.</p>
+</div>
+
+<script>
+function copyThis(el) {
+    var text = el.innerText.replace('click to copy', '').replace('copied', '').trim();
+    navigator.clipboard.writeText(text).then(function() {
+        el.classList.add('copied');
+        setTimeout(function() { el.classList.remove('copied'); }, 2000);
+    });
+}
+</script>
+
+</body>
+</html>
